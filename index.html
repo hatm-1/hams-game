@@ -424,9 +424,11 @@ const g=X.createLinearGradient(p.x,0,p.x+PW,0);
 g.addColorStop(0,L.r[1]);g.addColorStop(.5,L.r[0]);g.addColorStop(1,L.r[1]);
 X.fillStyle=g;X.fillRect(p.x,-10,PW,top+10);X.fillRect(p.x,bot,PW,gy-bot);
 X.fillRect(p.x-5,top-18,PW+10,18);X.fillRect(p.x-5,bot,PW+10,18);
-X.strokeStyle='rgba(127,240,216,.18)';X.lineWidth=1;
-for(let v=top-50;v>0;v-=36)X.strokeRect(p.x+PW/2-4,v,8,14);
-for(let v=bot+36;v<gy-14;v+=36)X.strokeRect(p.x+PW/2-4,v,8,14);
+const cx=p.x+PW/2,win=v=>{X.beginPath();X.moveTo(cx-3.5,v+14);X.lineTo(cx-3.5,v+4);X.arc(cx,v+4,3.5,Math.PI,0);X.lineTo(cx+3.5,v+14);X.closePath();X.fill()};
+X.save();X.fillStyle=L.acc;X.globalAlpha=.22;X.shadowColor=L.acc;X.shadowBlur=6;
+for(let v=top-50;v>0;v-=36)win(v);
+for(let v=bot+36;v<gy-14;v+=36)win(v);
+X.restore();
 X.shadowColor=L.acc;X.shadowBlur=14;X.fillStyle=L.acc;
 X.fillRect(p.x-5,top-3,PW+10,3);X.fillRect(p.x-5,bot,PW+10,3);X.shadowBlur=0}
 let hapUntil=0,flapUntil=0,idleNext=0,idleEx='calm',blinkAt=2,blinkUntil=0;
