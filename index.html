@@ -48,8 +48,8 @@ canvas{display:block}
 #score.pop{animation:pop .3s ease-out}
 @keyframes pop{40%{transform:scale(1.35)}}
 #ready{justify-content:flex-end;padding-bottom:22%;font-size:1.3em;color:var(--glow)}
-#ready span{animation:pulse 2s ease-in-out infinite}
-#rw{font-size:.72em;color:var(--moon);opacity:.85;margin:0 0 1.1em;max-width:82%;line-height:1.5}
+#rt{animation:pulse 2s ease-in-out infinite}
+#rw{font-size:.74em;color:var(--moon);margin:0 0 1.1em;max-width:88%;line-height:1.5}
 #over h2{font-size:3.6em;margin:0;color:var(--ember);text-shadow:0 0 .4em rgba(255,143,122,.5)}
 #over p{margin:.35em 0;font-size:1.3em}
 #over b{font-size:1.5em;color:var(--glow)}
@@ -113,7 +113,7 @@ canvas{display:block}
 #mtop{position:absolute;top:calc(env(safe-area-inset-top,0px) + .85em);right:.8em;display:flex;gap:.4em;z-index:3}
 .chip{display:flex;align-items:center;gap:.4em;padding:.4em .85em;border-radius:2em;background:rgba(0,0,0,.5);border:1px solid rgba(255,210,122,.4);color:#ffd27a;font-weight:700;font-size:.95em;backdrop-filter:blur(4px)}
 .chip.bump{animation:pop .35s ease-out}
-#pv{position:absolute;top:0;left:0;right:0;bottom:calc(env(safe-area-inset-bottom,0px) + 4.3em);overflow-y:auto;overflow-x:hidden;touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-top:calc(env(safe-area-inset-top,0px) + 3.7em);box-sizing:border-box;scrollbar-width:none}
+#pv{position:absolute;top:0;left:0;right:0;bottom:calc(max(env(safe-area-inset-bottom,0px),1em) + 4.6em);overflow-y:auto;overflow-x:hidden;touch-action:pan-y;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding-top:calc(env(safe-area-inset-top,0px) + 3.7em);box-sizing:border-box;scrollbar-width:none}
 #pv::-webkit-scrollbar{display:none}
 .pn{display:none;flex-direction:column;align-items:center;padding:0 0 1.5em;width:100%}
 .pn.on{display:flex;animation:pin .35s ease-out}
@@ -122,7 +122,7 @@ canvas{display:block}
 .sub{color:#ffd27a;margin:.1em 0 .8em;font-size:1em;opacity:.95;display:flex;gap:.8em;align-items:center}
 .h3{font-size:1.7em;margin:1.1em 0 .1em;font-weight:400;text-shadow:0 0 .4em var(--glow)}
 .dim{opacity:.72;font-size:.85em;margin:.2em 0;line-height:1.5}
-#nav{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-around;align-items:flex-end;padding:.35em .2em calc(env(safe-area-inset-bottom,0px) + .45em);background:linear-gradient(to top,rgba(6,7,24,.97),rgba(9,10,34,.9));border-top:1px solid rgba(127,240,216,.22);backdrop-filter:blur(8px);pointer-events:auto;z-index:3}
+#nav{position:absolute;left:0;right:0;bottom:0;display:flex;justify-content:space-around;align-items:flex-end;padding:.4em .2em calc(max(env(safe-area-inset-bottom,0px),1em) + .5em);background:linear-gradient(to top,rgba(6,7,24,.97),rgba(9,10,34,.9));border-top:1px solid rgba(127,240,216,.22);backdrop-filter:blur(8px);pointer-events:auto;z-index:3}
 #nav button{flex:1;font:inherit;background:none;border:0;color:rgba(246,236,200,.55);display:flex;flex-direction:column;align-items:center;gap:.22em;font-size:.72em;padding:.3em 0 0;cursor:pointer;transition:color .2s;position:relative}
 #nav svg{width:1.9em;height:1.9em}
 #nav button.on{color:var(--glow)}
@@ -130,7 +130,7 @@ canvas{display:block}
 #nav button.on::before{content:"";position:absolute;top:-.36em;width:1.6em;height:.18em;border-radius:1em;background:var(--glow);box-shadow:0 0 .6em var(--glow)}
 #nav .inf{color:#ffd27a}
 #nav .inf::before{display:none}
-#nav .inf .ic{width:3.5em;height:3.5em;margin-top:-1.9em;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 40% 35%,#3e327f,#15123a);border:1.5px solid #ffd27a;box-shadow:0 0 1.1em rgba(255,210,122,.5),inset 0 0 .8em rgba(255,210,122,.25);animation:glo 2.6s ease-in-out infinite}
+#nav .inf .ic{width:3.5em;height:3.5em;margin-top:-1.9em;margin-bottom:.15em;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 40% 35%,#3e327f,#15123a);border:1.5px solid #ffd27a;box-shadow:0 0 1.1em rgba(255,210,122,.5),inset 0 0 .8em rgba(255,210,122,.25);animation:glo 2.6s ease-in-out infinite}
 #nav .inf .ic svg{width:2.1em;height:2.1em}
 @keyframes glo{50%{box-shadow:0 0 1.8em rgba(255,210,122,.75),inset 0 0 1em rgba(255,210,122,.35)}}
 #nav .dot{position:absolute;top:.1em;left:calc(50% - 1.3em);width:.55em;height:.55em;border-radius:50%;background:#ff8f7a;box-shadow:0 0 .5em #ff8f7a}
@@ -240,11 +240,21 @@ canvas{display:block}
 #set .sh{display:flex;align-items:center;justify-content:space-between;margin-bottom:.4em}
 #set .sh h4{margin:0}
 #sClose{font-size:.8em;padding:.3em 1em}
-.shd{width:100%;display:flex;flex-direction:column;align-items:center;flex:none}
-#pv.shop{overflow:hidden}
-#pv.shop #p-shop{height:100%;padding-bottom:0;box-sizing:border-box}
-#p-shop #shopG{flex:1;min-height:0;overflow-y:auto;touch-action:pan-y;overscroll-behavior:contain;align-content:start;padding:.2em .3em 1.2em;box-sizing:border-box;scrollbar-width:none;-webkit-mask-image:linear-gradient(to bottom,transparent 0,#000 .8em)}
-#p-shop #shopG::-webkit-scrollbar{display:none}
+.shd{position:sticky;top:0;z-index:0;width:100%;display:flex;flex-direction:column;align-items:center;padding-bottom:.9em}
+.sheet{position:relative;z-index:1;width:100%;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;padding:.5em 0 1.6em;border-radius:1.5em 1.5em 0 0;background:linear-gradient(180deg,rgba(26,22,70,.98),rgba(11,12,36,.99) 30%);border-top:1px solid rgba(127,240,216,.28);box-shadow:0 -.8em 2em rgba(0,0,0,.45)}
+.sheet .grab{display:block;width:2.6em;height:.28em;border-radius:1em;background:rgba(246,236,200,.35);margin-bottom:.1em}
+.sheet .seg{margin-top:.5em}
+.ic{width:1.15em;height:1.15em;vertical-align:-.2em;flex:none;display:inline-block}
+.btn .ic,.btn2 .ic{width:1.2em;height:1.2em}
+.rl{display:flex;align-items:center;justify-content:center;gap:.5em;margin:.3em auto;padding:.45em .9em;border-radius:1em;background:rgba(9,10,34,.62);border:1px solid rgba(246,236,200,.14);line-height:1.5;text-align:right;width:fit-content;max-width:100%;box-sizing:border-box}
+.rl .ic{width:1.35em;height:1.35em}
+.tip-ic{width:1.1em;height:1.1em;vertical-align:-.15em}
+.tst .ti{display:flex}.tst .ti .ic{width:1.6em;height:1.6em}
+.ac .bd .ic{width:1.3em;height:1.3em}
+.ac.ok .bd{color:#5a3a00}
+.ac .bd{color:rgba(246,236,200,.8)}
+.it .pr .ic{width:1em;height:1em}
+#achB{position:relative;top:auto;left:auto}
 #p-shop>.ph{display:none}
 .it.glow{border-color:rgba(255,220,150,.6);box-shadow:0 0 .9em rgba(255,210,122,.35),inset 0 0 1.2em rgba(127,240,216,.12);animation:gl 2.4s ease-in-out infinite}
 @keyframes gl{50%{box-shadow:0 0 1.5em rgba(255,210,122,.6),inset 0 0 1.4em rgba(127,240,216,.25)}}
@@ -279,12 +289,11 @@ canvas{display:block}
 </div>
 <div id="load" class="layer hide"><h2 class="ar">همس</h2><div id="lbar"><div id="lb"></div></div><p id="lt" class="ar"></p><p class="ded ar">مهداة إلى همس الأمريكية</p></div>
 <div id="menu" class="layer hide">
-<div id="mtop"><div class="chip" id="wchip"><b class="cn"></b><span class="wv">٠</span></div></div>
-<button id="achB" aria-label="الأوسمة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l4 7 4-7"/><circle cx="12" cy="15" r="5.5"/><path d="M12 12.4l.9 1.7 1.9.3-1.4 1.3.3 1.9-1.7-.9-1.7.9.3-1.9-1.4-1.3 1.9-.3z" fill="currentColor" stroke="none"/></svg><i id="achN"></i></button>
+<div id="mtop"><div class="chip" id="wchip"><b class="cn"></b><span class="wv">٠</span></div><button id="achB" aria-label="الأوسمة"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3l4 7 4-7"/><circle cx="12" cy="15" r="5.5"/><path d="M12 12.4l.9 1.7 1.9.3-1.4 1.3.3 1.9-1.7-.9-1.7.9.3-1.9-1.4-1.3 1.9-.3z" fill="currentColor" stroke="none"/></svg><i id="achN"></i></button></div>
 <div id="pv">
 <section id="p-lv" class="pn">
 <h2 class="ph ar">المراحل</h2><div id="lvst" class="sub"></div><div id="grid"></div>
-<button id="rpEnd" class="btn2" style="margin-top:1.1em">🌅 شاهد الخاتمة مرة ثانية</button>
+<button id="rpEnd" class="btn2" style="margin-top:1.1em"></button>
 </section>
 <section id="p-day" class="pn">
 <h2 class="ph ar">تحدي اليوم</h2><p id="dDate" class="sub"></p>
@@ -292,7 +301,7 @@ canvas{display:block}
 <div class="drow"><div><small>الهدف</small><b>٢٠ عمود</b></div><div><small>أفضلك اليوم</small><b id="dBest">٠</b></div></div>
 <p id="dRew" class="gtx"></p><button id="dGo" class="btn">ابدأ التحدي</button>
 <p class="dim">نفس المسار لكل اللاعبين اليوم · تحدٍّ جديد بعد <span id="dCd"></span></p><p id="dStk" class="stk"></p></div>
-<button id="dFr" class="btn2" style="margin-top:1em">🏆 ترتيب أصدقائك اليوم</button>
+<button id="dFr" class="btn2" style="margin-top:1em"></button>
 </section>
 <section id="p-fr" class="pn">
 <h2 class="ph ar">الأصدقاء</h2><p class="sub">تنافس مع أصحابك</p>
@@ -311,9 +320,10 @@ canvas{display:block}
 <h3 class="h3 ar">الليالي بالترتيب</h3><div id="eNights" class="nts"></div>
 </section>
 <section id="p-shop" class="pn">
-<div class="shd"><canvas id="pvC"></canvas><p id="sName" class="ar"></p><button id="sAct" class="btn gold"></button>
-<div class="seg" id="sSeg"><button data-c="a" class="on">الزينة</button><button data-c="t">لون الذيل</button></div></div>
-<div id="shopG" class="sg"></div>
+<div class="shd"><canvas id="pvC"></canvas><p id="sName" class="ar"></p><button id="sAct" class="btn gold"></button></div>
+<div class="sheet" id="sheet"><i class="grab"></i>
+<div class="seg" id="sSeg"><button data-c="a" class="on">الزينة</button><button data-c="t">لون الذيل</button></div>
+<div id="shopG" class="sg"></div></div>
 </section>
 <section id="p-ach" class="pn">
 <h2 class="ph ar">الأوسمة</h2><p id="achSum" class="sub"></p><div id="achG" class="ag"></div>
@@ -329,7 +339,7 @@ canvas{display:block}
 </nav>
 </div>
 <div id="paused" class="layer hide"><h2 class="ar">استراحة</h2><div id="cdn" class="ar"></div><p id="pp"></p>
-<div id="pbtns"><button id="pr" class="btn">▶ متابعة</button><button id="pset" class="btn2"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>الإعدادات</button><button id="prs" class="btn2">↻ من البداية</button><button id="pm" class="btn2">القائمة</button></div></div>
+<div id="pbtns"><button id="pr" class="btn"></button><button id="pset" class="btn2"><svg width="1.1em" height="1.1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>الإعدادات</button><button id="prs" class="btn2"></button><button id="pm" class="btn2">القائمة</button></div></div>
 <div id="cfm" class="layer hide"><div class="gc"><h3 class="ar" id="cfT"></h3><p id="cfX"></p><div class="row"><button id="cfY" class="btn gold"></button><button id="cfN" class="btn2">لا</button></div></div></div>
 <div id="gift" class="layer hide"><div class="gc"><h3 class="ar">هدية اليوم</h3><p id="gSub"></p><div id="gDays"></div><p id="gBr"></p><button id="gOk" class="btn gold"></button></div></div>
 <div id="endL" class="layer hide">
@@ -528,6 +538,53 @@ $('mute').addEventListener('click',e=>{e.stopPropagation();initAudio();openSet(!
 applySet();
 document.addEventListener('visibilitychange',()=>{if(document.hidden){if(st==='play')setPause(true);else if(A)A.suspend()}else if(A&&!paused)A.resume()});
 
+/* ---------- أيقونات مرسومة (بدون إيموجي) ---------- */
+const ICP={
+moon:'M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z',
+sunrise:'M3 18h18M7 18a5 5 0 0 1 10 0M12 5v3M5.6 8.6l1.8 1.8M18.4 8.6l-1.8 1.8M2.5 14h2M19.5 14h2M9 21h6',
+dusk:'M3 20l6-8 4 5 3-3 5 6zM17.5 3.5a3.2 3.2 0 1 0 3 4.2 2.6 2.6 0 0 1-3-4.2z',
+star:'M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z',
+cloudBolt:'M7 16.5a4.5 4.5 0 1 1 1-8.9A6 6 0 0 1 19.5 10a3.5 3.5 0 0 1-1.2 6.5M12.8 12l-2.4 4.2h3.2L11.2 21',
+gem:'M6.5 4h11L21 9l-9 11L3 9zM3 9h18M10 4l-2 5 4 11 4-11-2-5',
+crown:'M3 8l4.5 4L12 5l4.5 7L21 8l-2 10H5zM5 21h14',
+inf:'M12 12c-2-2.7-4-4-6-4a4 4 0 0 0 0 8c2 0 4-1.3 6-4zm0 0c2 2.7 4 4 6 4a4 4 0 0 0 0-8c-2 0-4 1.3-6 4z',
+wind:'M3 8.5h11a3 3 0 1 0-3-3M3 12.5h15a3 3 0 1 1-3 3M3 16.5h7',
+sparkles:'M11 3l1.6 4.4L17 9l-4.4 1.6L11 15l-1.6-4.4L5 9l4.4-1.6zM18.5 13.5l.8 2.2 2.2.8-2.2.8-.8 2.2-.8-2.2-2.2-.8 2.2-.8z',
+coin:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="5"/>',
+coins:'M5 6.5c0-1.7 3.1-3 7-3s7 1.3 7 3-3.1 3-7 3-7-1.3-7-3zM5 6.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5M5 11.5v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5',
+bag:'M5 8h14l-1.2 11.2a2 2 0 0 1-2 1.8H8.2a2 2 0 0 1-2-1.8zM9 10V6.5a3 3 0 0 1 6 0V10',
+sparkle:'M12 2.5l2 7.5 7.5 2-7.5 2-2 7.5-2-7.5-7.5-2 7.5-2z',
+shield:'M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z',
+bolt:'M13.5 2.5L4.5 14h7l-1 7.5 9-11.5h-7z',
+ghost:'M5 21V11a7 7 0 0 1 14 0v10l-2.4-1.8-2.3 1.8-2.3-1.8-2.3 1.8-2.3-1.8zM9.5 11h.01M14.5 11h.01',
+cal:'M3.5 5h17v15.5h-17zM3.5 9.5h17M8 3v4M16 3v4M12 12.6l1 2 2.2.3-1.6 1.5.4 2.2-2-1.1-2 1.1.4-2.2-1.6-1.5 2.2-.3z',
+flame:'M12 21.5c3.9 0 6.8-2.8 6.8-6.6 0-3.6-2.7-5.6-3.8-8.6-.9 1.9-1.9 2.9-3.2 3.3.2-2.6-.4-5.2-2.6-7.1.1 3.8-4 6-4 11.6 0 4 3 7.4 6.8 7.4z',
+mail:'M3 6h18v12.5H3zM3 6.5l9 7 9-7',
+flag:'M5.5 21V3.5M5.5 4h11l-2.2 4 2.2 4h-11',
+bat:'M1.5 9c2 0 3.3 1.2 4.3 3.2 1-1.4 2.4-1.9 3.6-1.4L12 7.6l2.6 3.2c1.2-.5 2.6 0 3.6 1.4 1-2 2.3-3.2 4.3-3.2-1.6 1.6-2.2 4-2.2 6.3-1.4-1-3-1.1-4.2-.1-.8-1-2.1-1.6-4.1-1.6s-3.3.6-4.1 1.6c-1.2-1-2.8-.9-4.2.1 0-2.3-.6-4.7-2.2-6.3z',
+wave:'M2 10c2.5-3 5-3 7.5 0s5 3 7.5 0 3.7-2.6 5-1.6M2 15.5c2.5-3 5-3 7.5 0s5 3 7.5 0 3.7-2.6 5-1.6',
+leaf:'M5 19.5c0-9.5 6.2-14.5 15-14.5 0 9-5.3 15-14.4 15zM5 19.5l8.5-8.5',
+rain:'M7 13.5a4.5 4.5 0 1 1 1-8.9A6 6 0 0 1 19.5 7a3.5 3.5 0 0 1-1.5 6.5H7M8.5 16.5l-1 3M12.5 16.5l-1 3M16.5 16.5l-1 3',
+heat:'M8 21c-2-3 2-5 0-8s2-5 0-8M13 21c-2-3 2-5 0-8s2-5 0-8M18 21c-2-3 2-5 0-8s2-5 0-8',
+snow:'M12 2.5v19M3.8 7.3l16.4 9.4M20.2 7.3L3.8 16.7M9.3 3.8L12 5.6l2.7-1.8M9.3 20.2l2.7-1.8 2.7 1.8',
+meteor:'M15.5 9.5a4.2 4.2 0 1 1-6 6 4.2 4.2 0 0 1 6-6zM14.5 7.5l6.5-5.5M17 11l5-2.5M12 5.5l2.2-4',
+magnet:'M6 3.5v8a6 6 0 0 0 12 0v-8h-4v8a2 2 0 0 1-4 0v-8zM6 7.5h4M14 7.5h4',
+hourglass:'M6 3h12M6 21h12M7 3c0 5 5 6 5 9s-5 4-5 9M17 3c0 5-5 6-5 9s5 4 5 9',
+trophy:'M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 21h6M10 17h4l.5 4h-5z',
+lock:'M6 11h12v10H6zM8.5 11V8a3.5 3.5 0 0 1 7 0v3',
+check:'M4.5 12.5l5 5L20 7',
+play:'M7.5 4.8v14.4a1 1 0 0 0 1.5.9l11.4-7.2a1 1 0 0 0 0-1.8L9 3.9a1 1 0 0 0-1.5.9z',
+restart:'M4.5 12a7.5 7.5 0 1 0 2.2-5.3M4.5 4v4.5H9',
+link:'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
+warn:'M12 3.5l9.5 17h-19zM12 10v4.5M12 17.5h.01',
+save:'M12 3.5v11M7 10l5 5 5-5M5 20.5h14',
+users:'<circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c.6-3.3 2.8-5 5.5-5s4.9 1.7 5.5 5"/><circle cx="16.8" cy="9.5" r="2.6"/><path d="M15.6 14.6c2.6-.4 4.5 1.1 5 4.4"/>',
+smile:'<circle cx="12" cy="12" r="9"/><path d="M8 14c1.2 1.5 2.5 2 4 2s2.8-.5 4-2M9 9.5h.01M15 9.5h.01"/>',
+medal:'<path d="M8 3l4 7 4-7"/><circle cx="12" cy="15" r="5.5"/><path d="M12 12.4l.9 1.7 1.9.3-1.4 1.3.3 1.9-1.7-.9-1.7.9.3-1.9-1.4-1.3 1.9-.3z" fill="currentColor" stroke="none"/>',
+gift:'M4 9h16v4H4zM5.5 13h13v8h-13zM12 9v12M12 9c-1.5-3-5-4-5-1.5S10 9 12 9zM12 9c1.5-3 5-4 5-1.5S14 9 12 9z'};
+const ICF=new Set(['star','bat','play','sparkle','bolt','sparkles']);
+function ico(n,c,cls){const p=ICP[n]||'';const fl=ICF.has(n);return '<svg class="ic'+(cls?' '+cls:'')+'" viewBox="0 0 24 24" '+(fl?'fill="'+(c||'currentColor')+'" stroke="none"':'fill="none" stroke="'+(c||'currentColor')+'" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"')+'>'+(p[0]==='<'?p:'<path d="'+p+'"/>')+'</svg>'}
+$('rpEnd').innerHTML=ico('sunrise')+' شاهد الخاتمة مرة ثانية';$('dFr').innerHTML=ico('trophy')+' ترتيب أصدقائك اليوم';$('pr').innerHTML=ico('play')+' متابعة';$('prs').innerHTML=ico('restart')+' من البداية';
 /* ---------- الاهتزاز ---------- */
 let hapEl=null;
 function buzz(k){if(!prog.vib)return;const P={l:9,m:22,h:[35,45,80],w:[25,60,25,60,50]};
@@ -563,15 +620,15 @@ const PAT=[[0,0,0,0],[0,0,0,0],[.2,12,0,0],[.3,16,0,0],[.3,18,.15,18],[.5,20,.2,
 /* الجو: g جاذبية، fl قوة الرفرفة، gu هبّات (dir: -1 للأعلى، 1 للأسفل، بدونها عشوائي)، sea تيار صاعد قرب الماء */
 const ENV=[
 {},
-{gu:'sand',ga:300,txt:'🌬️ هبّات الرمل تدفعك أحيانًا'},
-{foe:'bat',txt:'🦇 احذر الخفافيش بين الأشجار'},
-{sea:1,txt:'🌊 نسيم البحر يرفعك قرب الماء'},
-{gu:'leaf',ga:300,dir:-1,foe:'bat',txt:'🍂 دوّامات الورق ترفعك… والخفافيش صاحية'},
-{g:1.08,gu:'rain',ga:320,dir:1,txt:'🌧️ المطر يثقّلك والريح تدفعك للأسفل'},
-{gu:'heat',ga:320,dir:-1,foe:'bat',txt:'🔥 تيارات الحرّ ترفعك'},
-{g:1.1,fl:.96,txt:'❄️ الثلج يثقّل جناحيك'},
-{g:.7,fl:.82,foe:'met',txt:'🌌 جاذبية خفيفة… والنيازك تتساقط'},
-{g:.92,foe:'met',txt:'🌙 الليلة الأخيرة… حلّق نحو القمر'}];
+{gu:'sand',ga:300,ic:'wind',txt:'رياح الصحراء تهبّ فجأة… انتبه للسهم قبل كل هبّة'},
+{foe:'bat',ic:'bat',txt:'خفافيش الغابة صاحية… مرّ من فوقها أو من تحتها'},
+{sea:1,ic:'wave',txt:'نسيم البحر يرفعك كل ما اقتربت من الماء'},
+{gu:'leaf',ga:300,dir:-1,foe:'bat',ic:'leaf',txt:'دوّامات الخريف ترفعك… والخفافيش تحوم'},
+{g:1.08,gu:'rain',ga:320,dir:1,ic:'rain',txt:'المطر يثقّل جناحيك… والريح تشدّك للأسفل'},
+{gu:'heat',ga:320,dir:-1,foe:'bat',ic:'heat',txt:'حرّ الأخدود يدفعك للأعلى… والخفافيش في الظل'},
+{g:1.1,fl:.96,ic:'snow',txt:'البرد يثقّل الطيران… رفرف أكثر من العادة'},
+{g:.7,fl:.82,foe:'met',ic:'meteor',txt:'الجاذبية خفيفة هنا… والنيازك تتساقط'},
+{g:.92,foe:'met',ic:'moon',txt:'الليلة الأخيرة… القمر ينتظرك'}];
 LV.forEach((l,i)=>{Object.assign(l,EX[i]);l.pat=PAT[i];l.env=ENV[i];l.pwc=i?.17:0;l.foec=ENV[i].foe?.3:0});
 let L=LV[0];
 
@@ -589,40 +646,40 @@ const itemOf=(c,id)=>SHOP[c].find(x=>x.id===id),locked=it=>it.lv!==undefined&&!p
 const owns=(c,id)=>{const it=itemOf(c,id);return!!it&&(it.p===0||prog.own.includes(c+':'+id))};
 
 /* ---------- القوى الخاصة ---------- */
-const PWD={sh:{n:'درع!',c:'#7ff0d8',d:'🛡️ الدرع يحميك من صدمة وحدة'},mg:{n:'مغناطيس!',c:'#ff8f7a',d:'🧲 المغناطيس يسحب العملات إليك ٨ ثوانٍ'},sl:{n:'إبطاء!',c:'#b89aff',d:'⏳ الزمن يبطئ ٥ ثوانٍ… خذ نفَسك'}};
+const PWD={sh:{n:'درع!',c:'#7ff0d8',ic:'shield',d:'الدرع يحميك من صدمة وحدة'},mg:{n:'مغناطيس!',c:'#ff8f7a',ic:'magnet',d:'المغناطيس يسحب العملات إليك ٨ ثوانٍ'},sl:{n:'إبطاء!',c:'#b89aff',ic:'hourglass',d:'الزمن يبطئ ٥ ثوانٍ… خذ نفَسك'}};
 
 /* ---------- الأوسمة ---------- */
 const ACH=[
-['first','🌆','أول ليلة','أكمل المرحلة الأولى',10,()=>[prog.s[0]?1:0,1]],
-['all','🌙','الليالي العشر','أكمل المراحل العشر كلها',50,()=>[prog.s.filter(Boolean).length,10]],
-['stars','⭐','سماء كاملة','اجمع ٣٠ نجمة',100,()=>[starSum(),30]],
-['storm3','⛈️','سيد العاصفة','ثلاث نجوم في العاصفة',30,()=>[prog.s[5]||0,3]],
-['gem1','💎','عين لمّاحة','الق أول جوهرة مخبّأة',15,()=>[gemSum()?1:0,1]],
-['gems','👑','صائد الجواهر','اجمع الجواهر العشر',80,()=>[gemSum(),10]],
-['end25','♾️','بلا نهاية','٢٥ عمود في بلا نهاية',20,()=>[prog.eb,25]],
-['run50','🌬️','نفَس طويل','٥٠ عمود في محاولة وحدة',40,()=>[prog.eb,50]],
-['end100','🌌','أسطورة الليل','١٠٠ عمود في بلا نهاية',100,()=>[prog.eb,100]],
-['coins100','🪙','جامع الذهب','اجمع ١٠٠ عملة',15,()=>[prog.tc,100]],
-['coins1000','💰','كنز القمر','اجمع ١٠٠٠ عملة',60,()=>[prog.tc,1000]],
-['buy','🛍️','أول هدية','اشترِ أول شي من المتجر',10,null],
-['nm10','✨','على الشعرة','مرّ ١٠ مرات من فتحة ضيقة جدًا',20,()=>[prog.st.nm,10]],
-['shield','🛡️','نجاة','خلّ الدرع ينقذك',10,null],
-['pw10','⚡','قوى خاصة','التقط ١٠ قوى خاصة',15,()=>[prog.st.pw,10]],
-['ghost','👻','تفوّقت على نفسك','اسبق ظلّك',15,null],
-['daily','📅','تحدي اليوم','أكمل تحديًا يوميًا',15,null],
-['streak7','🔥','وفاء','ادخل ٧ أيام ورا بعض',50,()=>[prog.stk.n,7]],
-['share','💌','همسة للأصحاب','شارك نتيجتك',10,null],
-['persist','💪','ما أستسلم','٥٠ محاولة',10,()=>[prog.st.runs,50]],
-['ending','🌅','الفجر','شاهد الخاتمة',30,null]];
+['first','dusk','أول ليلة','أكمل المرحلة الأولى',10,()=>[prog.s[0]?1:0,1]],
+['all','moon','الليالي العشر','أكمل المراحل العشر كلها',50,()=>[prog.s.filter(Boolean).length,10]],
+['stars','star','سماء كاملة','اجمع ٣٠ نجمة',100,()=>[starSum(),30]],
+['storm3','cloudBolt','سيد العاصفة','ثلاث نجوم في العاصفة',30,()=>[prog.s[5]||0,3]],
+['gem1','gem','عين لمّاحة','الق أول جوهرة مخبّأة',15,()=>[gemSum()?1:0,1]],
+['gems','crown','صائد الجواهر','اجمع الجواهر العشر',80,()=>[gemSum(),10]],
+['end25','inf','بلا نهاية','٢٥ عمود في بلا نهاية',20,()=>[prog.eb,25]],
+['run50','wind','نفَس طويل','٥٠ عمود في محاولة وحدة',40,()=>[prog.eb,50]],
+['end100','sparkles','أسطورة الليل','١٠٠ عمود في بلا نهاية',100,()=>[prog.eb,100]],
+['coins100','coin','جامع الذهب','اجمع ١٠٠ عملة',15,()=>[prog.tc,100]],
+['coins1000','coins','كنز القمر','اجمع ١٠٠٠ عملة',60,()=>[prog.tc,1000]],
+['buy','bag','أول هدية','اشترِ أول شي من المتجر',10,null],
+['nm10','sparkle','على الشعرة','مرّ ١٠ مرات من فتحة ضيقة جدًا',20,()=>[prog.st.nm,10]],
+['shield','shield','نجاة','خلّ الدرع ينقذك',10,null],
+['pw10','bolt','قوى خاصة','التقط ١٠ قوى خاصة',15,()=>[prog.st.pw,10]],
+['ghost','ghost','تفوّقت على نفسك','اسبق ظلّك',15,null],
+['daily','cal','تحدي اليوم','أكمل تحديًا يوميًا',15,null],
+['streak7','flame','وفاء','ادخل ٧ أيام ورا بعض',50,()=>[prog.stk.n,7]],
+['share','mail','همسة للأصحاب','شارك نتيجتك',10,null],
+['persist','flag','ما أستسلم','٥٠ محاولة',10,()=>[prog.st.runs,50]],
+['ending','sunrise','الفجر','شاهد الخاتمة',30,null]];
 function ach(id){if(prog.ach[id])return;const a=ACH.find(x=>x[0]===id);if(!a)return;prog.ach[id]=Date.now();prog.c+=a[4];save();wal(true);
 toast(a[1],a[2],'<b class="cn"></b> +'+ar(a[4]));setTimeout(()=>sfx.ach(),120)}
 function chkAch(){for(const a of ACH)if(a[5]&&!prog.ach[a[0]]){const[c,m]=a[5]();if(c>=m)ach(a[0])}}
 
 /* ---------- الإشعارات والتلميحات ---------- */
-function toast(ic,title,sub){const e=document.createElement('div');e.className='tst';e.innerHTML='<span class="ti">'+ic+'</span><div><b>'+esc(title)+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</div>';
+function toast(ic,title,sub){const e=document.createElement('div');e.className='tst';e.innerHTML='<span class="ti">'+ico(ic,'#ffd27a')+'</span><div><b>'+esc(title)+'</b>'+(sub?'<small>'+sub+'</small>':'')+'</div>';
 const box=$('toasts');while(box.children.length>2)box.firstChild.remove();box.appendChild(e);setTimeout(()=>e.remove(),3200)}
 let tipUntil=0;
-function showTip(s,d){$('tip').textContent=s;show('tip',true);tipUntil=t+(d||3)}
+function showTip(s,d,ic){$('tip').innerHTML=(ic?ico(ic,'currentColor','tip-ic')+' ':'')+esc(s);show('tip',true);tipUntil=t+(d||3)}
 function wal(bump){document.querySelectorAll('.wv').forEach(e=>e.textContent=ar(prog.c));if(bump){const c=$('wchip');c.classList.remove('bump');void c.offsetWidth;c.classList.add('bump')}}
 
 /* ---------- حالة اللعبة ---------- */
@@ -641,18 +698,19 @@ pw={sh:0,mg:0,sl:0};inv=0;ts=1;zoom=1;gxp=PX;prevL=null;xf=1;gust={ph:0,tt:2.5,d
 reset();
 function startRun(title,sub,info){GAP=L.gap;reset();hapUntil=0;st='ready';setOpen=false;en=null;
 ['menu','over','intro','load','tip','set','endL','gift'].forEach(k=>show(k,false));show('score',false);show('pause',false);
-$('rn').textContent=title;$('rt').textContent=sub;$('rw').textContent=info||'';show('ready',true)}
+$('rn').textContent=title;$('rt').textContent=sub;$('rw').innerHTML=info||'';show('ready',true)}
+function envLine(env,g){let h='';if(env.txt)h+='<span class="rl">'+ico(env.ic,L.acc)+esc(env.txt)+'</span>';if(g)h+='<span class="rl">'+ico('ghost','#c8d6ff')+'ظلّك الأفضل يطير معك</span>';return h}
 function begin(i){mode='lv';li=i;L=LV[i];rP=mul(1000+i*7919);rW=mul(77+i*131);const a=prog.ad[i];gapBonus=a&&a.n>=5?Math.min(20,(a.n-4)*4):0;
 gemK=Math.max(3,Math.round(L.goal*.6));gh=GH['l'+i]||null;
-startRun('المرحلة '+ar(i+1)+': '+L.n,i?'المس لتبدأ':'المس الشاشة لترفرف',[L.env.txt,gh&&prog.ghost?'👻 ظلّك الأفضل يطير معك':''].filter(Boolean).join(' · '));startLv(i)}
+startRun('المرحلة '+ar(i+1)+': '+L.n,i?'المس لتبدأ':'المس الشاشة لترفرف',envLine(L.env,gh&&prog.ghost));startLv(i)}
 function dayFix(){const d=dkey();if(prog.day.d!==d)prog.day={d,best:0,done:0}}
 const daySeed=()=>+dkey().replace(/-/g,''),dayTheme=()=>Math.floor(mul(daySeed()*7+3)()*10);
 function beginDay(){mode='day';dayFix();const th=dayTheme(),sd=daySeed();li=th;
 L=Object.assign({},LV[th],{goal:20,gap:166,sp:140,sd:212,pat:[.4,22,.2,20],pwc:.18,foec:LV[th].env.foe?.25:0});
 rP=mul(sd);rW=mul(sd*3+1);gapBonus=0;gemK=-1;gh=GH['d'+dkey()]||null;
-startRun('تحدي اليوم: '+LV[th].n,'المس لتبدأ',[L.env.txt,gh&&prog.ghost?'👻 ظلّك يطير معك':''].filter(Boolean).join(' · '));startLv(th)}
+startRun('تحدي اليوم: '+LV[th].n,'المس لتبدأ',envLine(L.env,gh&&prog.ghost));startLv(th)}
 function beginEnd(){mode='end';li=0;L=Object.assign({},LV[0],{goal:Infinity});rP=mul(Math.random()*2e9|0);rW=mul(Math.random()*2e9|0);gapBonus=0;gemK=-1;gh=null;
-startRun('بلا نهاية','المس لتبدأ',prog.eb?'🏆 أفضل رقم لك: '+ar(prog.eb)+' · كل عشرة أعمدة ليلة جديدة':'كل عشرة أعمدة… ليلة جديدة');startLv(0)}
+startRun('بلا نهاية','المس لتبدأ',prog.eb?'<span class="rl">'+ico('trophy','#ffd27a')+'أفضل رقم لك: '+ar(prog.eb)+'</span><span class="rl">كل عشرة أعمدة… ليلة جديدة</span>':'كل عشرة أعمدة… ليلة جديدة');startLv(0)}
 function switchTheme(th){prevL=L;L=Object.assign({},LV[th],{goal:Infinity});xf=0;startLv(th);gust={ph:0,tt:2.5,dir:1,a:0,u:0};
 pops.push({s:LV[th].n,c:LV[th].acc,x:W/2,y:H*.3,l:1.6,sz:30})}
 
@@ -666,7 +724,7 @@ $('grid').addEventListener('click',e=>{const b=e.target.closest('.cd');if(!b||b.
 $('rpEnd').addEventListener('click',()=>{initAudio();startEnding(true)});
 function setTab(k){tab=k;document.querySelectorAll('.pn').forEach(p=>p.classList.toggle('on',p.id==='p-'+k));
 document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('on',b.dataset.t===k));$('pv').scrollTop=0;
-$('achB').classList.toggle('on',k==='ach');$('pv').classList.toggle('shop',k==='shop');
+$('achB').classList.toggle('on',k==='ach');
 ({lv:buildMenu,day:buildDay,end:buildEnd,shop:buildShop,fr:buildFr,ach:buildAch})[k]()}
 $('nav').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;initAudio();const k=b.dataset.t;sfx.tick();buzz('l');if(k!==tab)setTab(k)});
 $('achB').addEventListener('click',()=>{initAudio();sfx.tick();setTab('ach')});
@@ -696,10 +754,10 @@ const daysW=n=>n===1?'يوم واحد':n===2?'يومان':n<=10?ar(n)+' أيام
 function buildDay(){dayFix();wal();const th=dayTheme(),l=LV[th];
 $('dTheme').textContent=l.n;$('dTheme').style.color=l.acc;
 $('dDate').textContent=new Date().toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long'});
-$('dEnv').textContent=l.env.txt||'ليلة هادئة… بلا مفاجآت';
+$('dEnv').innerHTML=l.env.txt?ico(l.env.ic,l.acc)+' '+esc(l.env.txt):'ليلة هادئة… بلا مفاجآت';
 $('dBest').textContent=ar(prog.day.best);
-$('dRew').innerHTML=prog.day.done?'✓ أخذت مكافأة اليوم':'مكافأة أول إكمال اليوم: <b class="cn"></b> ٢٥';
-$('dStk').textContent=prog.stk.n>0?'🔥 سلسلتك: '+daysW(prog.stk.n):'';
+$('dRew').innerHTML=prog.day.done?ico('check','#7ff0d8')+' أخذت مكافأة اليوم':'مكافأة أول إكمال اليوم: <b class="cn"></b> ٢٥';
+$('dStk').innerHTML=prog.stk.n>0?ico('flame','#ff9a6a')+' سلسلتك: '+daysW(prog.stk.n):'';
 updCd()}
 $('dGo').addEventListener('click',()=>{initAudio();beginDay()});
 function buildFr(){dayFix();wal();$('fName').value=prog.name||'';const today=dkey();
@@ -707,33 +765,33 @@ const me={i:prog.id,n:prog.name||'أنت',e:prog.eb,s:starSum(),d:prog.day.d,b:p
 const v=f=>frSeg==='e'?f.e:frSeg==='s'?f.s:(f.d===today?f.b:-1);
 const all=[me,...prog.fr].sort((a,b)=>v(b)-v(a)||(b.me?1:0)-(a.me?1:0));
 $('fList').innerHTML=all.map((f,i)=>{const val=v(f);return `<div class="fr${f.me?' me':''}"><span class="rk${val>0&&i<3?' r'+(i+1):''}">${ar(i+1)}</span><span class="fn">${esc(f.n)}${f.me?'<small>أنت</small>':''}</span><span class="fv">${val<0?'—':(frSeg==='s'?'★ ':'')+ar(val)}</span></div>`}).join('')+
-(prog.fr.length?'':'<p class="dim" style="text-align:center">ما عندك أصدقاء هنا للحين… ادعُهم وتنافسوا 🌙</p>')}
+(prog.fr.length?'':'<p class="dim" style="text-align:center">ما عندك أصدقاء هنا للحين… ادعُهم وتنافسوا</p>')}
 $('fSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;frSeg=b.dataset.s;$('fSeg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));sfx.tick();buildFr()});
 $('fName').addEventListener('input',e=>{prog.name=e.target.value.trim().slice(0,14);save()});
 $('fName').addEventListener('change',()=>buildFr());
 $('fAdd').addEventListener('click',()=>{$('fBox').classList.toggle('h');if(!$('fBox').classList.contains('h'))$('fCode').focus()});
 $('fOk').addEventListener('click',()=>{if(addFriend($('fCode').value)){$('fCode').value='';$('fBox').classList.add('h');buildFr()}});
-$('fInv').addEventListener('click',async()=>{const url=myLink(),txt='تعال تنافسني في همس 🌙 افتح الرابط وبتنضاف لترتيبي:';
+$('fInv').addEventListener('click',async()=>{const url=myLink(),txt='تعال تنافسني في همس… افتح الرابط وبتنضاف لترتيبي:';
 try{if(navigator.share){await navigator.share({title:'همس',text:txt,url});return}}catch(e){if(e&&e.name==='AbortError')return}
-try{await navigator.clipboard.writeText(txt+'\n'+url);toast('🔗','نسخنا رابطك','الصقه لأصحابك في أي محادثة')}catch(e){$('fBox').classList.remove('h');$('fCode').value=url;$('fCode').select();toast('🔗','هذا رابطك','انسخه وأرسله لأصحابك')}});
+try{await navigator.clipboard.writeText(txt+'\n'+url);toast('link','نسخنا رابطك','الصقه لأصحابك في أي محادثة')}catch(e){$('fBox').classList.remove('h');$('fCode').value=url;$('fCode').select();toast('link','هذا رابطك','انسخه وأرسله لأصحابك')}});
 const b64e=s=>{const b=new TextEncoder().encode(s);let r='';b.forEach(c=>r+=String.fromCharCode(c));return btoa(r).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
 const b64d=s=>{s=s.replace(/-/g,'+').replace(/_/g,'/');while(s.length%4)s+='=';const r=atob(s);return new TextDecoder().decode(Uint8Array.from(r,c=>c.charCodeAt(0)))};
 const hsh=s=>{let h=2166136261;for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return(h>>>0).toString(36)};
 function myCode(){dayFix();const j=JSON.stringify({i:prog.id,n:prog.name||'لاعب',e:prog.eb,s:starSum(),d:prog.day.d,b:prog.day.best});return b64e(j)+'.'+hsh(j+'hams')}
 function myLink(){return location.href.split('#')[0]+'#f='+myCode()}
 function addFriend(str){try{str=(str||'').trim();const m=str.match(/f=([\w\-.]+)/);if(m)str=m[1];const[a,h]=str.split('.');const j=b64d(a);if(hsh(j+'hams')!==h)throw 0;const o=JSON.parse(j);if(!o.i)throw 0;
-if(o.i===prog.id){toast('🙂','هذا رابطك أنت');return false}
+if(o.i===prog.id){toast('smile','هذا رابطك أنت');return false}
 const f={i:String(o.i).slice(0,12),n:String(o.n||'صديق').slice(0,14),e:+o.e||0,s:+o.s||0,d:String(o.d||''),b:+o.b||0,at:Date.now()};
-const k=prog.fr.findIndex(x=>x.i===f.i);if(k>=0)prog.fr[k]=f;else prog.fr.push(f);save();toast('🤝',k>=0?'حدّثنا نتيجة '+f.n:'أضفنا '+f.n+' لأصدقائك');return true}
-catch(e){toast('⚠️','الرابط غير صحيح','تأكد إنك نسخته كامل');return false}}
+const k=prog.fr.findIndex(x=>x.i===f.i);if(k>=0)prog.fr[k]=f;else prog.fr.push(f);save();toast('users',k>=0?'حدّثنا نتيجة '+f.n:'أضفنا '+f.n+' لأصدقائك');return true}
+catch(e){toast('warn','الرابط غير صحيح','تأكد إنك نسخته كامل');return false}}
 if(location.hash.startsWith('#f=')){pendFr=location.hash.slice(1);try{history.replaceState(null,'',location.pathname+location.search)}catch(e){}}
 
 /* هدية السلسلة اليومية */
 const GIFT=[10,15,20,25,30,40,60];let giftN=0,giftR=0;
 function checkGift(){const d=dkey();if(prog.stk.last===d)return;const cont=prog.stk.last===yest(),n=cont?prog.stk.n+1:1,broke=!cont&&prog.stk.n>1;giftN=n;giftR=GIFT[(n-1)%7];
 $('gSub').textContent='اليوم '+ar(n)+' من سلسلتك';
-$('gBr').textContent=broke?'انقطعت سلسلتك… نبدأها من جديد 🌱':(n%7===0?'أسبوع كامل! هذي أكبر هدية 🎉':'ارجع بكرة… الهدية تكبر');
-const pos=(n-1)%7;$('gDays').innerHTML=GIFT.map((r,i)=>`<div class="gd${i<pos?' done':i===pos?' now':''}"><small>${ar(i+1)}</small><b>${i<pos?'✓':ar(r)}</b></div>`).join('');
+$('gBr').textContent=broke?'انقطعت سلسلتك… نبدأها من جديد':(n%7===0?'أسبوع كامل! هذي أكبر هدية':'ارجع بكرة… الهدية تكبر');
+const pos=(n-1)%7;$('gDays').innerHTML=GIFT.map((r,i)=>`<div class="gd${i<pos?' done':i===pos?' now':''}"><small>${ar(i+1)}</small><b>${i<pos?ico('check'):ar(r)}</b></div>`).join('');
 $('gOk').innerHTML='استلم <b class="cn"></b> '+ar(giftR);show('gift',true);sfx.pw()}
 $('gOk').addEventListener('click',()=>{prog.c+=giftR;prog.tc+=0;prog.stk={last:dkey(),n:giftN};save();show('gift',false);wal(true);
 [0,1,2,3].forEach(i=>setTimeout(()=>sfx.coin(),i*90));buzz('m');if(giftN>=7)ach('streak7');if(tab==='day')buildDay()});
@@ -744,26 +802,27 @@ function withCtx(c,fn){const o=X;X=c;try{fn()}finally{X=o}}
 function selOpts(){const o={acc:prog.acc,tail:prog.tail};if(shopSel){const[c,id]=shopSel.split(':');if(c==='a')o.acc=id;else o.tail=id}return o}
 function buildShop(){wal();const g=$('shopG'),list=SHOP[shopCat],cur=shopCat==='a'?prog.acc:prog.tail;
 g.innerHTML=list.map(it=>{const id=shopCat+':'+it.id,own=owns(shopCat,it.id),eq=cur===it.id,lk=!own&&(it.p<0||locked(it));
-const pr=eq?'✓ ترتديه':own?'مملوك':it.p<0?'🔒 '+it.lock:locked(it)?'🔒 المرحلة '+ar(it.lv+1):'<b class="cn"></b>'+ar(it.p);
+const pr=eq?ico('check')+' ترتديه':own?'مملوك':it.p<0?ico('lock')+' '+it.lock:locked(it)?ico('lock')+' المرحلة '+ar(it.lv+1):'<b class="cn"></b>'+ar(it.p);
 return `<button class="it${eq?' eq':''}${own?' own':''}${shopSel===id&&!eq?' sel':''}${it.glow?' glow':''}${lk?' lck':''}" data-id="${id}"><canvas></canvas><span class="nm">${it.n}</span><span class="pr">${pr}</span></button>`}).join('');
 g.querySelectorAll('.it').forEach(b=>{const[c,id]=b.dataset.id.split(':');drawIcon(b.querySelector('canvas'),c==='a'?{acc:id,tail:prog.tail}:{acc:'none',tail:id},c)});
-$('sSeg').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.c===shopCat));shopBar()}
+$('sSeg').querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.c===shopCat));shopBar();sheetH()}
+function sheetH(){const pv=$('pv'),pad=parseFloat(getComputedStyle(pv).paddingTop)||0;$('sheet').style.minHeight=Math.max(0,pv.clientHeight-pad)+'px'}
 function shopBar(){const b=$('sAct');let nm,txt,dis=false,act='';
 if(!shopSel){const o=selOpts();nm=itemOf('a',o.acc).n+' · '+itemOf('t',o.tail).n;txt='اضغط على أي شي لتجرّبه';dis=true}
 else{const[c,id]=shopSel.split(':'),it=itemOf(c,id),own=owns(c,id),eq=(c==='a'?prog.acc:prog.tail)===id;nm=it.n;
-if(eq){if(c==='a'&&id!=='none'){txt='اخلعه';act='off'}else{txt='✓ ترتديه';dis=true}}
+if(eq){if(c==='a'&&id!=='none'){txt='اخلعه';act='off'}else{txt=ico('check')+' ترتديه';dis=true}}
 else if(own){txt='ارتدِه';act='wear'}
-else if(it.p<0){txt='🔒 شاهد الخاتمة لتحصل عليه';dis=true}
-else if(locked(it)){txt='🔒 أكمل المرحلة '+ar(it.lv+1)+' لتفتحه';dis=true}
+else if(it.p<0){txt=ico('lock')+' شاهد الخاتمة لتحصل عليه';dis=true}
+else if(locked(it)){txt=ico('lock')+' أكمل المرحلة '+ar(it.lv+1)+' لتفتحه';dis=true}
 else if(prog.c>=it.p){txt='اشترِ بـ <b class="cn"></b> '+ar(it.p);act='buy'}
 else{txt='ينقصك <b class="cn"></b> '+ar(it.p-prog.c);dis=true}}
 $('sName').textContent=nm;b.innerHTML=txt;b.disabled=dis;b.dataset.act=act;b.classList.toggle('gold',act==='buy')}
-$('shopG').addEventListener('click',e=>{const b=e.target.closest('.it');if(!b)return;shopSel=b.dataset.id;sfx.tick();buildShop()});
+$('shopG').addEventListener('click',e=>{const b=e.target.closest('.it');if(!b)return;shopSel=b.dataset.id;sfx.tick();buildShop();$('pv').scrollTo({top:0,behavior:'smooth'})});
 $('sSeg').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;shopCat=b.dataset.c;shopSel=null;sfx.tick();buildShop()});
 $('sAct').addEventListener('click',()=>{if(!shopSel)return;const sel=shopSel,[c,id]=sel.split(':'),it=itemOf(c,id),act=$('sAct').dataset.act;
 if(act==='buy'){confirmBox('تأكيد الشراء','تشتري «'+it.n+'» بـ <b class="cn" style="display:inline-block"></b> '+ar(it.p)+'؟<br><small style="opacity:.75">يبقى معك <b class="cn" style="display:inline-block"></b> '+ar(prog.c-it.p)+'</small>','اشترِ',()=>{
-if(owns(c,id)||prog.c<it.p)return;prog.c-=it.p;prog.own.push(sel);sfx.buy();buzz('m');save();wal(true);toast('🛍️','صار لك: '+it.n,'اضغط «ارتدِه» لتلبسه');ach('buy');buildShop()});return}
-if(act==='wear'){if(c==='a')prog.acc=id;else prog.tail=id;sfx.pw();buzz('l');toast('✨','ترتدي الحين: '+it.n)}
+if(owns(c,id)||prog.c<it.p)return;prog.c-=it.p;prog.own.push(sel);sfx.buy();buzz('m');save();wal(true);toast('bag','صار لك: '+it.n,'اضغط «ارتدِه» لتلبسه');ach('buy');buildShop()});return}
+if(act==='wear'){if(c==='a')prog.acc=id;else prog.tail=id;sfx.pw();buzz('l');toast('sparkle','ترتدي الحين: '+it.n)}
 else if(act==='off'){prog.acc='none';sfx.tick()}
 save();buildShop()});
 let cfmFn=null;
@@ -778,9 +837,9 @@ const g=c.createRadialGradient(w/2,h/2,0,w/2,h/2,h*.55);g.addColorStop(0,'rgba(1
 withCtx(c,()=>{const s=h/60;c.setTransform(s,0,0,s,w*.6,h*.6+Math.sin(t*2.2)*s*1.5);drawGirl(0,0,{e:shopSel?'happy':curEx(),acc:o.acc,tail:o.tail,tilt:Math.sin(t*1.3)*.08,flapT:.3})})}
 
 /* الأوسمة */
-function buildAch(){wal();const n=ACH.filter(a=>prog.ach[a[0]]).length;$('achSum').innerHTML='🏅 '+ar(n)+' / '+ar(ACH.length);
+function buildAch(){wal();const n=ACH.filter(a=>prog.ach[a[0]]).length;$('achSum').innerHTML=ico('medal')+' '+ar(n)+' / '+ar(ACH.length);
 $('achG').innerHTML=ACH.map(([id,ic,nm,d,r,p])=>{const ok=!!prog.ach[id];let pg='';if(!ok&&p){const[c,m]=p();pg=`<div class="pg"><i style="width:${Math.min(100,c/m*100)}%"></i></div>`}
-return `<div class="ac${ok?' ok':''}"><div class="bd">${ic}</div><div><b>${nm}</b><small>${d}</small><small class="rw">${ok?'✓ حصلت عليه':'<b class="cn" style="display:inline-block"></b> +'+ar(r)}</small>${pg}</div></div>`}).join('');
+return `<div class="ac${ok?' ok':''}"><div class="bd">${ico(ic)}</div><div><b>${nm}</b><small>${d}</small><small class="rw">${ok?ico('check')+' حصلت عليه':'<b class="cn" style="display:inline-block"></b> +'+ar(r)}</small>${pg}</div></div>`}).join('');
 const S2=[['الأعمدة',prog.st.pill],['المحاولات',prog.st.runs],['المراحل المكتملة',prog.st.wins],['أفضل بلا نهاية',prog.eb],['العملات المجموعة',prog.tc],['مرّات على الشعرة',prog.st.nm]];
 $('stats').innerHTML=S2.map(([a,b])=>`<div class="sti"><b>${ar(b)}</b><small>${a}</small></div>`).join('')}
 
@@ -796,7 +855,7 @@ if(gemGot)$('onew').innerHTML='<span style="color:#c89aff">◆ لقيت الجو
 $('nb').textContent=w?(li<9?'المس للمرحلة التالية':'أنرتَ الليل كله'):'المس للمحاولة مرة ثانية';
 if(w){if(s>(prog.s[li]||0))prog.s[li]=s;prog.u=Math.max(prog.u,Math.min(9,li+1))}}
 else if(mode==='end'){oh.textContent='سقطت';$('ol1').innerHTML='الأعمدة <b>'+ar(score)+'</b>';$('ol2').innerHTML='أفضل رقم <b>'+ar(prog.eb)+'</b> · العملات <b>'+ar(lc)+'</b>'+coinNote();
-if(newBest&&score>0)$('onew').textContent='🏆 رقم جديد!';$('nb').textContent='المس للمحاولة مرة ثانية'}
+if(newBest&&score>0)$('onew').innerHTML=ico('trophy')+' رقم جديد!';$('nb').textContent='المس للمحاولة مرة ثانية'}
 else{oh.textContent=w?'أكملت تحدي اليوم':'سقطت';if(w)oh.style.color='#ffd27a';
 $('ol1').innerHTML='الأعمدة <b>'+ar(score)+'</b> / <b>٢٠</b>';$('ol2').innerHTML='أفضلك اليوم <b>'+ar(prog.day.best)+'</b>'+coinNote();
 if(dayRew)$('onew').innerHTML='+٢٥ <b class="cn" style="display:inline-block"></b> مكافأة التحدي';$('nb').textContent='المس للمحاولة مرة ثانية'}
@@ -873,7 +932,7 @@ if(it.k==='coin'){lc++;let gn=false;if(mode==='end')gn=lc>runEbc;else if(!it.old
 if(gn){prog.c++;prog.tc++;runGain++}sfx.coin();hapUntil=t+.6;buzz('l');hud();burst(it.x,it.y,gn?'#ffd27a':'#d8dcef',6,90)}
 else if(it.k==='gem'){gemGot=true;prog.gem[li]=1;prog.c+=10;prog.tc+=10;sfx.gem();buzz('m');hapUntil=t+1.2;popTxt('جوهرة مخبّأة! +١٠','#c89aff',22);burst(it.x,it.y,'#c89aff',30,200);save();ach('gem1');if(gemSum()>=10)ach('gems')}
 else{prog.st.pw++;pw[it.k]=it.k==='sh'?1:it.k==='mg'?8:5;sfx.pw();buzz('m');popTxt(PWD[it.k].n,PWD[it.k].c,22);burst(it.x,it.y,PWD[it.k].c,18,160);
-if(!prog.seen[it.k]){prog.seen[it.k]=1;showTip(PWD[it.k].d,3.4)}if(prog.st.pw>=10)ach('pw10')}}
+if(!prog.seen[it.k]){prog.seen[it.k]=1;showTip(PWD[it.k].d,3.4,PWD[it.k].ic)}if(prog.st.pw>=10)ach('pw10')}}
 function burst(x,y0,c,n,sp){for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,v=sp*(.35+Math.random()*.65);parts.push({x,y:y0,vx:Math.cos(a)*v,vy:Math.sin(a)*v,l:1,d:1.1+Math.random()*.9,c,s:1+Math.random()*1.8,g:40})}}
 function popTxt(s,c,sz){pops.push({s,c:c||'#fff',x:clamp(gxp+18,80,W-80),y:y-30,l:1,sz:sz||20})}
 const NM=['يا سلام!','على الشعرة!','ما شاء الله!','يا حظّك!','بالمليمتر!'];
@@ -881,13 +940,13 @@ function nearMiss(){runNm++;prog.st.nm++;popTxt(NM[Math.floor(Math.random()*NM.l
 function passPipe(p){score++;prog.st.pill++;hapUntil=t+1.1;sfx.score(score-1);
 if(!p.br&&p.md>=0&&p.md<8)nearMiss();
 if(mode==='end'){if(score%10===0)switchTheme(Math.floor(score/10)%10);
-if(!bestShown&&prog.eb>0&&score>prog.eb){bestShown=true;popTxt('🏆 رقم جديد!','#ffd27a',24);sfx.ach();burst(gxp,y,'#ffd27a',24,200)}
+if(!bestShown&&prog.eb>0&&score>prog.eb){bestShown=true;popTxt('رقم جديد!','#ffd27a',24);sfx.ach();burst(gxp,y,'#ffd27a',24,200)}
 if(score>=25)ach('end25');if(score>=50)ach('run50');if(score>=100)ach('end100')}
 if(score>=L.goal)win();
 const e=$('score');hud();e.classList.remove('pop');void e.offsetWidth;e.classList.add('pop')}
 function gustStep(dt,env){if(!env.gu||(mode==='lv'&&li===0))return 0;const G=gust;
 if(G.ph===0){G.tt-=dt;if(G.tt<=0){G.ph=1;G.tt=.9;G.dir=env.dir||(rW()<.5?-1:1)}}
-else if(G.ph===1){G.tt-=dt;if(G.tt<=0){G.ph=2;G.u=0;sfx.gust();if(!prog.seen.gu){prog.seen.gu=1;showTip(env.txt,3)}}}
+else if(G.ph===1){G.tt-=dt;if(G.tt<=0){G.ph=2;G.u=0;sfx.gust();if(!prog.seen.gu){prog.seen.gu=1;showTip(env.txt,3,env.ic)}}}
 else{G.u+=dt/1.4;if(G.u>=1){G.ph=0;G.tt=3.2+rW()*3.4;G.a=0;return 0}}
 G.a=G.ph===2?Math.sin(Math.PI*G.u):0;return G.a*G.dir*env.ga}
 function ghostY(){if(!gh||!gh.y||gh.y.length<2)return null;const i=rd/5,k=Math.floor(i);if(k>=gh.y.length-1)return null;const f=i-k;return gh.y[k]*(1-f)+gh.y[k+1]*f}
@@ -940,10 +999,10 @@ for(const f of foes){f.t+=dw;
 if(f.k==='bat'){f.x-=speed*dw;f.y=f.y0+Math.sin(f.t*2.6+f.ph)*f.a}
 else if(!f.on){f.x-=speed*dw;if(f.x<f.trig){f.on=true;f.vy=260;f.vx=-70}}
 else{f.x+=(f.vx-speed)*dw;f.y+=f.vy*dw;if(Math.random()<.7)parts.push({x:f.x,y:f.y,vx:(Math.random()-.5)*30,vy:-20,l:.8,d:2.2,c:'#ffb070',s:1.6,g:0});if(f.y>H-GR-6){f.dead=1;burst(f.x,H-GR-4,'#ffb070',14,120);sfx.pop()}}
-if(f.x<W-10&&!prog.seen['f'+f.k]){prog.seen['f'+f.k]=1;showTip(f.k==='bat'?'🦇 خفاش! تفاداه أو انتظره يبتعد':'☄️ نيزك! راقب العلامة فوق',3)}
+if(f.x<W-10&&!prog.seen['f'+f.k]){prog.seen['f'+f.k]=1;showTip(f.k==='bat'?'خفاش! تفاداه أو انتظره يبتعد':'نيزك! راقب العلامة الحمراء فوق',3,f.k==='bat'?'bat':'meteor')}
 if(!f.dead&&Math.hypot(f.x-PX,f.y-y)<R+8){if(hitObs('foe',f))break}}
 foes=foes.filter(f=>!f.dead&&f.x>-40)}
-if(gh&&!ghPassed&&mode!=='end'&&rd>gh.d){ghPassed=true;const gy0=gh.y[gh.y.length-1]||y;burst(PX,gy0,'#c8d6ff',16,110);if(!gh.w&&score>0){popTxt('👻 سبقت ظلّك!','#c8d6ff',21);ach('ghost')}}
+if(gh&&!ghPassed&&mode!=='end'&&rd>gh.d){ghPassed=true;const gy0=gh.y[gh.y.length-1]||y;burst(PX,gy0,'#c8d6ff',16,110);if(!gh.w&&score>0){popTxt('سبقت ظلّك!','#c8d6ff',21);ach('ghost')}}
 if(y<R){y=R;vy=Math.max(vy,0)}
 if(st==='play'&&y+R>=H-GR){y=H-GR-R;if(inv>0){vy=-560}else hitObs('ground')}}
 if((st==='dead'||st==='dying')&&y+R>=H-GR){y=H-GR-R;vy=0}
@@ -1005,7 +1064,7 @@ e.t=Math.max(e.t,19.5);e.fl0=1;e.fl=Math.max(e.fl,.9);flash=.7;
 if(A)[48,55,60,64,67,72].forEach(m=>tone(440*Math.pow(2,(m-69)/12),6,.04,'sine',0,true,0,true))}
 setEndTx('');
 $('endSt').innerHTML='<span>النجوم <b>★ '+ar(starSum())+' / ٣٠</b></span><span>الجواهر <b style="color:#c89aff">◆ '+ar(gemSum())+' / ١٠</b></span><span>العملات <b>'+ar(prog.tc)+'</b></span><span>الأوسمة <b>'+ar(Object.keys(prog.ach).length+(prog.ach.ending?0:1))+' / '+ar(ACH.length)+'</b></span>';
-$('endRw').innerHTML=e.first?'🌙 حصلت على <b>تاج القمر</b><br><small style="opacity:.8">تلقاه في المتجر</small>':'شكرًا لأنك رجعت للخاتمة 🌙';
+$('endRw').innerHTML=e.first?ico('moon','#ffd27a')+' حصلت على <b>تاج القمر</b><br><small style="opacity:.8">تلقاه في المتجر</small>':'شكرًا لأنك رجعت للخاتمة';
 setTimeout(()=>{show('endCard',true);ach('ending');prepShare('ending')},skip?500:300)}
 $('eskip').addEventListener('click',e=>{e.stopPropagation();finishEnding(true)});
 $('ehome').addEventListener('click',()=>{if(enG){const g=enG;g.gain.setTargetAtTime(0,A.currentTime,.3);setTimeout(()=>{try{g.disconnect()}catch(x){}},2000);enG=null}tab='lv';toMenu()});
@@ -1035,15 +1094,15 @@ c.font="500 54px Tajawal";c.fillStyle='#f6ecc8';c.fillText(sub,Wc/2,1060);
 c.font="700 64px 'Aref Ruqaa',serif";c.fillStyle='#ffd27a';c.fillText(kind==='ending'?'حلّق معي حتى الفجر':'تقدر تتفوق علي؟',Wc/2,1180);
 c.shadowBlur=0;c.font="400 40px Tajawal";c.globalAlpha=.75;c.fillStyle='#f6ecc8';c.fillText('حلّق بهدوء… ولا توقظ الليل',Wc/2,1275);
 const blob=await new Promise(r=>cv.toBlob(r,'image/png'));
-const txt=kind==='ending'?'أنرت الليالي العشر في همس 🌅':kind==='end'?'نتيجتي في همس (بلا نهاية): '+ar(score)+' 🌙 تقدر تتفوق علي؟':kind==='day'?'تحدي اليوم في همس: '+ar(score)+' / ٢٠ 🌙 جرّب تتفوق علي':'نتيجتي في همس («'+L.n+'»): '+ar(score)+' / '+ar(L.goal)+' 🌙 تقدر تتفوق علي؟';
+const txt=kind==='ending'?'أنرت الليالي العشر في همس':kind==='end'?'نتيجتي في همس (بلا نهاية): '+ar(score)+' … تقدر تتفوق علي؟':kind==='day'?'تحدي اليوم في همس: '+ar(score)+' / ٢٠… جرّب تتفوق علي':'نتيجتي في همس («'+L.n+'»): '+ar(score)+' / '+ar(L.goal)+' … تقدر تتفوق علي؟';
 return{blob,file:new File([blob],'hams.png',{type:'image/png'}),txt}}
-async function doShare(){const p=shareP||makeCard(shareKind||mode);const d=await p;if(!d){toast('⚠️','ما قدرنا نجهّز الصورة');return}
+async function doShare(){const p=shareP||makeCard(shareKind||mode);const d=await p;if(!d){toast('warn','ما قدرنا نجهّز الصورة');return}
 const url=myLink();
 try{if(navigator.canShare&&navigator.canShare({files:[d.file]}))await navigator.share({files:[d.file],title:'همس',text:d.txt+'\n'+url});
 else if(navigator.share)await navigator.share({title:'همس',text:d.txt,url});
 else{const a=document.createElement('a');a.href=URL.createObjectURL(d.blob);a.download='hams.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
-let cp=false;try{await navigator.clipboard.writeText(d.txt+'\n'+url);cp=true}catch(e){}toast('💾','حفظنا صورة نتيجتك',cp?'ونسخنا رابط التحدي':'')}
-ach('share')}catch(e){if(e&&e.name==='AbortError')return;toast('⚠️','ما قدرنا نشارك الحين')}}
+let cp=false;try{await navigator.clipboard.writeText(d.txt+'\n'+url);cp=true}catch(e){}toast('save','حفظنا صورة نتيجتك',cp?'ونسخنا رابط التحدي':'')}
+ach('share')}catch(e){if(e&&e.name==='AbortError')return;toast('warn','ما قدرنا نشارك الحين')}}
 
 /* ---------- الرسم ---------- */
 function ridge(base,a,b,sp,col,fa){
@@ -1336,7 +1395,7 @@ X.save();X.translate(sx,sy);
 if(zoom>1.002){X.translate(gxp,y);X.scale(zoom,zoom);X.translate(-gxp,-y)}
 drawBG(prevL&&xf<1?prevL:L);
 if(prevL&&xf<1){X=OX;X.setTransform(S*DPR,0,0,S*DPR,0,0);X.clearRect(0,0,W,H);drawBG(L);X=X0;X.save();X.setTransform(1,0,0,1,0,0);X.globalAlpha=xf;X.drawImage(OC,0,0);X.restore()}
-if(mode==='end'&&prog.ebd>0&&(st==='play'||st==='dying')){const bx=PX+(prog.ebd-rd);if(bx>-10&&bx<W+40){X.save();X.strokeStyle='rgba(255,210,122,.75)';X.setLineDash([6,6]);X.lineWidth=1.5;X.beginPath();X.moveTo(bx,0);X.lineTo(bx,H-GR);X.stroke();X.setLineDash([]);X.fillStyle='#ffd27a';X.shadowColor='#000';X.shadowBlur=6;X.font="700 12px Tajawal,sans-serif";X.textAlign='center';X.fillText('🏆 '+ar(prog.eb),bx,H-GR-12);X.restore()}}
+if(mode==='end'&&prog.ebd>0&&(st==='play'||st==='dying')){const bx=PX+(prog.ebd-rd);if(bx>-10&&bx<W+40){X.save();X.strokeStyle='rgba(255,210,122,.75)';X.setLineDash([6,6]);X.lineWidth=1.5;X.beginPath();X.moveTo(bx,0);X.lineTo(bx,H-GR);X.stroke();X.setLineDash([]);X.fillStyle='#ffd27a';X.shadowColor='#000';X.shadowBlur=6;X.font="700 12px Tajawal,sans-serif";X.textAlign='center';X.fillText('أفضل رقم '+ar(prog.eb),bx,H-GR-12);X.restore()}}
 for(const p of pipes)pillar(p);
 for(const it of items)drawItem(it);
 for(const f of foes)drawFoe(f);
