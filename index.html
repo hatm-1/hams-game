@@ -303,7 +303,8 @@ canvas{display:block}
 <label>الموسيقى<input id="mu" type="range" min="0" max="100"></label>
 <label>السطوع<input id="br" type="range" min="40" max="130"></label>
 <label class="mt"><input id="mm" type="checkbox"> كتم الصوت</label>
-<label class="mt"><input id="vb" type="checkbox"> الاهتزاز</label></div>
+<label class="mt"><input id="vb" type="checkbox"> الاهتزاز</label>
+<label class="mt"><input id="gs" type="checkbox"> ظل أفضل محاولة</label></div>
 </div>
 <div id="side"><h1>همس</h1><p>حلّق بهدوء… ولا توقظ الليل</p><p style="margin-top:1.5em;opacity:.7">مهداة إلى همس الأمريكية</p></div>
 <div id="side2"><h3>كيف تلعب</h3><p>انقر أو المس الشاشة أو اضغط المسافة لترفرف</p><p>مرّ من بين الأعمدة واجمع القطع الذهبية</p><p>التقط الدرع والمغناطيس والإبطاء، وابحث عن الجوهرة المخبّأة في كل مرحلة</p><p>عشر ليالٍ، وتحدٍّ يومي، ووضع بلا نهاية</p><p>P أو Esc للإيقاف</p></div>
@@ -330,7 +331,7 @@ function hex(c){const n=parseInt(c.slice(1),16);return[n>>16&255,n>>8&255,n&255]
 function mixC(a,b,k){const A1=hex(a),B1=hex(b);return'rgb('+A1.map((v,i)=>Math.round(v+(B1[i]-v)*k)).join(',')+')'}
 
 /* ---------- الحفظ ---------- */
-const P0={s:[],u:0,c:0,tc:0,gem:[],own:[],acc:'none',tail:'night',ach:{},st:{runs:0,deaths:0,pill:0,nm:0,pw:0,wins:0},ad:[],eb:0,ebd:0,day:{d:'',best:0,done:0},stk:{last:'',n:0},end:0,name:'',id:'',fr:[],vib:1,seen:{}};
+const P0={s:[],u:0,c:0,tc:0,gem:[],own:[],acc:'none',tail:'night',ach:{},st:{runs:0,deaths:0,pill:0,nm:0,pw:0,wins:0},ad:[],eb:0,ebd:0,day:{d:'',best:0,done:0},stk:{last:'',n:0},end:0,name:'',id:'',fr:[],vib:1,ghost:1,seen:{}};
 let prog=JSON.parse(JSON.stringify(P0));
 try{const d=JSON.parse(localStorage.getItem('hams-prog'));if(d&&d.s){for(const k in P0)if(d[k]!==undefined&&d[k]!==null)prog[k]=d[k];prog.st=Object.assign({},P0.st,d.st||{});if(d.tc===undefined)prog.tc=prog.c}}catch(e){}
 if(!prog.id)prog.id=Math.random().toString(36).slice(2,9);
@@ -470,10 +471,11 @@ let cfg={sf:.9,mu:.7,br:1};
 try{Object.assign(cfg,JSON.parse(localStorage.getItem('hams-set')))}catch(e){}
 function applySet(){if(A){sbus.gain.value=cfg.sf;mbus.gain.value=cfg.mu;master.gain.setTargetAtTime(muted?0:.9,A.currentTime,.05)}
 Wd.style.filter='brightness('+cfg.br+')';try{localStorage.setItem('hams-set',JSON.stringify(cfg))}catch(e){}}
-$('sf').value=cfg.sf*100;$('mu').value=cfg.mu*100;$('br').value=cfg.br*100;$('vb').checked=!!prog.vib;
+$('sf').value=cfg.sf*100;$('mu').value=cfg.mu*100;$('br').value=cfg.br*100;$('vb').checked=!!prog.vib;$('gs').checked=!!prog.ghost;
 ['sf','mu','br'].forEach(k=>$(k).addEventListener('input',e=>{cfg[k]=e.target.value/100;applySet()}));
 $('mm').addEventListener('change',e=>{muted=e.target.checked;applySet()});
 $('vb').addEventListener('change',e=>{prog.vib=e.target.checked?1:0;save();buzz('m')});
+$('gs').addEventListener('change',e=>{prog.ghost=e.target.checked?1:0;save()});
 $('mute').addEventListener('click',e=>{e.stopPropagation();initAudio();openSet(!setOpen)});
 applySet();
 document.addEventListener('visibilitychange',()=>{if(document.hidden){if(st==='play')setPause(true);else if(A)A.suspend()}else if(A&&!paused)A.resume()});
@@ -588,13 +590,13 @@ function startRun(title,sub,info){GAP=L.gap;reset();hapUntil=0;st='ready';setOpe
 $('rn').textContent=title;$('rt').textContent=sub;$('rw').textContent=info||'';show('ready',true)}
 function begin(i){mode='lv';li=i;L=LV[i];rP=mul(1000+i*7919);rW=mul(77+i*131);const a=prog.ad[i];gapBonus=a&&a.n>=5?Math.min(20,(a.n-4)*4):0;
 gemK=Math.max(3,Math.round(L.goal*.6));gh=GH['l'+i]||null;
-startRun('المرحلة '+ar(i+1)+': '+L.n,i?'المس لتبدأ':'المس الشاشة لترفرف',[L.env.txt,gh?'👻 ظلّك الأفضل يطير معك':''].filter(Boolean).join(' · '));startLv(i)}
+startRun('المرحلة '+ar(i+1)+': '+L.n,i?'المس لتبدأ':'المس الشاشة لترفرف',[L.env.txt,gh&&prog.ghost?'👻 ظلّك الأفضل يطير معك':''].filter(Boolean).join(' · '));startLv(i)}
 function dayFix(){const d=dkey();if(prog.day.d!==d)prog.day={d,best:0,done:0}}
 const daySeed=()=>+dkey().replace(/-/g,''),dayTheme=()=>Math.floor(mul(daySeed()*7+3)()*10);
 function beginDay(){mode='day';dayFix();const th=dayTheme(),sd=daySeed();li=th;
 L=Object.assign({},LV[th],{goal:20,gap:166,sp:140,sd:212,pat:[.4,22,.2,20],pwc:.18,foec:LV[th].env.foe?.25:0});
 rP=mul(sd);rW=mul(sd*3+1);gapBonus=0;gemK=-1;gh=GH['d'+dkey()]||null;
-startRun('تحدي اليوم: '+LV[th].n,'المس لتبدأ',[L.env.txt,gh?'👻 ظلّك يطير معك':''].filter(Boolean).join(' · '));startLv(th)}
+startRun('تحدي اليوم: '+LV[th].n,'المس لتبدأ',[L.env.txt,gh&&prog.ghost?'👻 ظلّك يطير معك':''].filter(Boolean).join(' · '));startLv(th)}
 function beginEnd(){mode='end';li=0;L=Object.assign({},LV[0],{goal:Infinity});rP=mul(Math.random()*2e9|0);rW=mul(Math.random()*2e9|0);gapBonus=0;gemK=-1;gh=null;
 startRun('بلا نهاية','المس لتبدأ',prog.eb?'🏆 أفضل رقم لك: '+ar(prog.eb)+' · كل عشرة أعمدة ليلة جديدة':'كل عشرة أعمدة… ليلة جديدة');startLv(0)}
 function switchTheme(th){prevL=L;L=Object.assign({},LV[th],{goal:Infinity});xf=0;startLv(th);gust={ph:0,tt:2.5,dir:1,a:0,u:0};
@@ -1197,7 +1199,7 @@ for(let x=-18;x<W+18;x+=18){const px=x-(gx%18),h=4+((Math.floor((x+gx)/18)*7)%5)
 X.stroke();
 const tcl=trailC(prog.tail);for(const q of trail){X.globalAlpha=q.l*.7;X.fillStyle=tcl;X.beginPath();X.arc(q.x-(1-q.l)*30,q.y,2.2*q.l+.5,0,7);X.fill()}
 X.globalAlpha=1;
-if(gh&&mode!=='end'&&(st==='play'||st==='dying')){const gy2=ghostY();if(gy2!=null)drawGirl(PX,gy2,{e:'calm',a:.3,tail:'snow',acc:'none',ng:1,tilt:0})}
+if(gh&&prog.ghost&&mode!=='end'&&st==='play'){const gy2=ghostY();if(gy2!=null){const a=.12*clamp((Math.abs(gy2-y)-30)/60,0,1);if(a>.005){X.save();X.translate(PX,gy2);X.scale(.75,.75);drawGirl(0,0,{e:'calm',a,tail:'snow',acc:'none',ng:1,tilt:0});X.restore()}}}
 drawGust();
 if(en&&st==='ending')for(const l of en.lt){const a=(1-en.fl)*l.s;if(a<=.01)continue;X.save();X.globalAlpha=a;const rg=X.createRadialGradient(l.x,l.y,0,l.x,l.y,13);rg.addColorStop(0,l.c);rg.addColorStop(1,l.c+'00');X.fillStyle=rg;X.beginPath();X.arc(l.x,l.y,13,0,7);X.fill();X.fillStyle='#fff';X.beginPath();X.arc(l.x,l.y,2.3,0,7);X.fill();X.restore()}
 const blink=inv>0&&Math.floor(t*14)%2;
