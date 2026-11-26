@@ -554,30 +554,63 @@ const MU=[
 {r:76,s:[0,2,4,7,9],d:.7,w:'sine',p:null,pad:[0,7,12],v:.12,bell:1},
 {r:50,s:[0,2,3,5,7,9,10],d:.42,w:'triangle',p:[0,2,4,6,4,3,2,-1,1,3,5,7,5,4,2,-1],pad:[0,3,7,10],v:.1,ins:'keys',drum:1},
 {r:55,s:[0,2,4,5,7,9,11],d:.4,w:'triangle',p:[0,2,4,7,4,2,5,4],pad:[0,4,7],v:.11,prog:[0,-3,-7,-5],ins:'kanun'},
-/* المريخ: زجاج، ثيرمين، وسنث نابض */
-{r:50,s:[0,2,4,6,7,9,11],d:.6,p:[0,4,2,6,4,7,5,-1],pad:[0,7,14],v:.1,ins:'glass'},
-{r:45,s:[0,1,4,5,7,8,10],d:.7,p:[0,2,1,4,-1,3,2,0],pad:[0,7],v:.11,ins:'ther'},
-{r:43,s:[0,1,3,5,7,8,10],d:.3,p:[0,2,4,2,0,3,5,3,0,2,4,6,4,2,1,-1],pad:[0,7],v:.1,ins:'arp',drum:1},
-{r:55,s:[0,2,4,6,8,10],d:.8,p:null,pad:[0,4,8],v:.1,ins:'glass'},
-{r:64,s:[0,2,4,7,9],d:.7,p:null,pad:[0,7,12],v:.1,ins:'glass',bell:1},
-{r:41,s:[0,2,3,5,7,8,10],d:.4,p:[0,-1,3,-1,2,-1,5,4],pad:[0,7],v:.1,ins:'arp',drum:1},
-{r:52,s:[0,2,4,6,7,9,11],d:.5,p:[0,4,7,4,2,6,9,6],pad:[0,4,7,11],v:.1,ins:'ther'},
-{r:48,s:[0,1,3,5,6,8,10],d:.9,p:null,pad:[0,6],v:.09,ins:'glass'},
-{r:46,s:[0,1,4,5,7,8,10],d:.3,p:[0,4,2,5,4,1,2,-1,0,4,7,5,4,2,1,-1],pad:[0,7],v:.1,ins:'arp',drum:1},
-{r:55,s:[0,2,4,7,9],d:.5,p:[0,2,4,2,3,1,2,0],pad:[0,7,12],v:.11,ins:'ther',prog:[0,-3,-5,-7]},
-/* المشتري: أرغن وأبواق ضخمة */
-{r:43,s:[0,2,4,5,7,9,11],d:.7,p:[0,4,7,4,5,2,4,0],pad:[0,7,12],v:.1,ins:'organ'},
-{r:40,s:[0,2,3,5,7,8,10],d:.5,p:[0,-1,3,2,0,-1,5,4],pad:[0,7],v:.09,ins:'brass',drum:1},
-{r:38,s:[0,1,3,5,7,8,10],d:.35,p:[0,2,1,4,0,3,2,6],pad:[0,7],v:.09,ins:'arp',drum:1},
-{r:52,s:[0,2,4,6,7,9,11],d:.8,p:null,pad:[0,7,11,14],v:.09,ins:'glass'},
-{r:47,s:[0,1,4,5,7,8,10],d:.4,p:[0,2,4,2,1,4,5,-1],pad:[0,7],v:.1,ins:'brass',darb:1},
-{r:64,s:[0,2,4,7,9],d:.7,p:null,pad:[0,7,12],v:.09,ins:'glass',bell:1},
-{r:45,s:[0,2,4,5,7,9,10],d:.6,p:[0,2,4,7,6,4,2,1],pad:[0,4,7],v:.1,ins:'organ'},
-{r:42,s:[0,2,3,5,7,8,10],d:.9,p:null,pad:[0,3,7],v:.09,ins:'organ'},
-{r:55,s:[0,2,4,6,8,10],d:.5,p:[0,2,4,6,4,2,1,3],pad:[0,4,8],v:.09,ins:'ther'},
-{r:43,s:[0,2,3,5,7,8,11],d:.4,p:[0,2,3,5,7,5,3,2,0,-1,4,5,7,8,7,5],pad:[0,3,7],v:.09,ins:'brass',drum:1,prog:[0,-2,-4,-5]}];
+/* المريخ */
+{song:{bpm:84,r:62,s:'lyd',lead:'glass',pad:1,bass:'slow',dr:'soft',v:.11,seed:1010}},
+{song:{bpm:92,r:57,s:'pdm',lead:'ther',pad:1,bass:'drone',dr:'none',v:.11,seed:1111}},
+{song:{bpm:128,r:64,s:'min',lead:'arp',arp:1,bass:'eighth',dr:'drive',v:.09,seed:1212}},
+{song:{bpm:70,r:55,s:'maj',lead:'glass',pad:1,arp:1,bass:'slow',dr:'none',v:.11,seed:1313}},
+{song:{bpm:96,r:64,s:'maj',lead:'bell',pad:1,bass:'slow',dr:'soft',v:.1,seed:1414}},
+{song:{bpm:110,r:53,s:'min',lead:'arp',pad:'tri',bass:'eighth',dr:'march',v:.09,seed:1515}},
+{song:{bpm:120,r:60,s:'lyd',lead:'ther',arp:1,bass:'pop',dr:'pop',v:.1,seed:1616}},
+{song:{bpm:76,r:52,s:'phr',lead:'glass',pad:1,bass:'drone',dr:'none',v:.11,seed:1717}},
+{song:{bpm:136,r:62,s:'hmin',lead:'arp',arp:1,bass:'eighth',dr:'drive',v:.09,seed:1818}},
+{song:{bpm:80,r:55,s:'maj',lead:'ther',pad:1,bass:'slow',dr:'soft',v:.11,seed:1919,prog:[0,5,3,4]}},
+/* المشتري */
+{song:{bpm:90,r:53,s:'maj',lead:'organ',pad:1,bass:'slow',dr:'soft',v:.1,seed:2020}},
+{song:{bpm:104,r:50,s:'min',lead:'brass',pad:1,bass:'pop',dr:'march',v:.1,seed:2121}},
+{song:{bpm:140,r:59,s:'min',lead:'arp',arp:1,bass:'eighth',dr:'drive',v:.09,seed:2222}},
+{song:{bpm:72,r:57,s:'lyd',lead:'glass',pad:1,bass:'slow',dr:'none',v:.11,seed:2323}},
+{song:{bpm:116,r:52,s:'pdm',lead:'brass',bass:'pop',dr:'darb',v:.1,seed:2424}},
+{song:{bpm:88,r:60,s:'maj',lead:'bell',pad:1,bass:'slow',dr:'soft',v:.1,seed:2525}},
+{song:{bpm:96,r:51,s:'maj',lead:'organ',pad:1,bass:'slow',dr:'waltz',v:.1,seed:2626}},
+{song:{bpm:66,r:57,s:'min',lead:'organ',pad:1,bass:'drone',dr:'none',v:.1,seed:2727}},
+{song:{bpm:112,r:62,s:'lyd',lead:'ther',arp:1,bass:'pop',dr:'pop',v:.1,seed:2828}},
+{song:{bpm:150,r:48,s:'hmin',lead:'brass',arp:1,bass:'eighth',dr:'drive',v:.1,seed:2929}}];
 /* موازنة الصوت: كل مرحلة بنفس الارتفاع تقريبًا (مقاسة) */
-const LVOL=[1.1,1.15,.79,.62,1.46,.71,1.15,1.26,1.43,1.19, 1.43,.71,1.53,2.04,1.86,2.7,.71,2.3,1.5,.62, .68,1.41,1.24,1.4,1.2,1.62,.67,.93,.74,.97];
+const LVOL=[1.1,1.15,0.79,0.62,1.46,0.71,1.15,1.26,1.43,1.19,1.29,0.74,1.44,1.53,1.33,2.52,0.89,1.39,1.37,0.73,0.87,1.26,1.17,1.22,1.29,1.29,0.88,0.77,0.78,0.91];
+
+/* ---------- ملحّن الأغاني: لكل مرحلة أغنية كاملة (لحن، كوردات، باص، طبول) ---------- */
+const SC={maj:[0,2,4,5,7,9,11],min:[0,2,3,5,7,8,10],lyd:[0,2,4,6,7,9,11],dor:[0,2,3,5,7,9,10],phr:[0,1,3,5,7,8,10],pdm:[0,1,4,5,7,8,10],hmin:[0,2,3,5,7,8,11],mix:[0,2,4,5,7,9,10]};
+const PROGS=[[0,5,3,4],[0,3,4,0],[0,4,5,3],[5,3,0,4],[0,6,5,4],[0,2,3,4],[0,3,5,4],[3,4,0,0],[0,5,1,4],[0,1,3,0]];
+const RHY=['x.x.x.x.','x..x..x.','x.x.xx..','x...x.x.','x.x...x.','xx.x.x..','x..xx.x.','x.xxx...','x.x.x...','x..x.x..'];
+const DRS={none:{},soft:{k:'x.......',h:'..x...x.'},pop:{k:'x...x...',s:'..x...x.',h:'x.x.x.x.'},drive:{k:'x.x.x.x.',s:'..x...x.',h:'xxxxxxxx'},march:{k:'x...x...',s:'..x.x.xx'},waltz:{k:'x.....x.',s:'...x....',h:'x..x..x.'}};
+function compose(sp,seed){const r=mul(seed),pick=a=>a[Math.floor(r()*a.length)],prog=sp.prog||pick(PROGS),S7=SC[sp.s],N=128,mel=new Array(N).fill(0);
+const ct=(c,v)=>{let best=v,bd=99;for(const b of[c,c+2,c+4])for(const o of[-7,0,7,14]){const x=b+o;if(x<2||x>12)continue;const d=Math.abs(x-v)+r()*.8;if(d<bd){bd=d;best=x}}return best};
+const mk=()=>({rh:[pick(RHY),pick(RHY)],cn:Array.from({length:8},()=>pick([-2,-1,-1,1,1,2,0,3,-3]))});
+const A=mk(),B=mk();let prev=5+Math.floor(r()*3);
+for(let bar=0;bar<16;bar++){const sec=bar<8?A:B,lift=bar<8?0:2,c=prog[bar%4],end=bar%4===3,last=bar===15;
+let rh=sec.rh[bar%2];if(end)rh=last?'x.......':pick(['x...x...','x.x.x...','x...x.x.']);
+const inv=(bar%8===4||bar%8===5)?-1:1;let first=true;
+for(let st8=0;st8<8;st8++){if(rh[st8]!=='x')continue;let v;
+if(first){v=ct(c,prev+lift*(bar%8===0?1:0));first=false}else{v=prev+inv*sec.cn[st8];if(st8%4===0)v=ct(c,v)}
+if(end&&st8===rh.lastIndexOf('x'))v=last?(prev>7?7:0)+(prev>9?7:0):ct(c,v);
+v=clamp(v,1,12);let len=1;while(st8+len<8&&rh[st8+len]!=='x')len++;mel[bar*8+st8]={d:v,l:len};prev=v}}
+return{prog,mel,S7}}
+const fq=(m,deg,oct)=>440*Math.pow(2,(m.song.r+m._c.S7[((deg%7)+7)%7]+12*(Math.floor(deg/7)+(oct||0))-69)/12);
+function lead(ins,f,dur,v,dl){if(ins==='glass')glass(f,dur*1.4,v,dl);else if(ins==='ther')ther(f,dur*1.1,v,dl);else if(ins==='arp')arp(f,dur*.9,v*.8,dl);else if(ins==='organ')organ(f,dur*1.05,v*.75,dl);
+else if(ins==='brass')brass(f,dur*1.05,v*.6,dl);else if(ins==='bell'){tone(f,dur*2,v,'sine',0,true,dl,true);tone(f*2.76,dur,v*.3,'sine',0,true,dl,true)}else if(ins==='kanun')pluck(f,v*1.3,dl,true,1);else keys(f,dur*1.2,v,dl)}
+function songStep(m){const sp=m.song;if(!m._c)m._c=compose(sp,sp.seed);const C=m._c,d=60/sp.bpm/2,dl=Math.max(0,mnx-A.currentTime),i=mst%128,bar=Math.floor(i/8),st8=i%8,c=C.prog[bar%4],v=sp.v||.1;
+const n=C.mel[i];if(n)lead(sp.lead,fq(m,n.d),n.l*d,v,dl);
+if(sp.pad&&st8===0)[c,c+2,c+4].forEach(x=>tone(fq(m,x,-1),d*8.5,v*.32,sp.pad==='tri'?'triangle':'sine',0,true,dl,true));
+const bs=sp.bass||'slow',bv=v*1.1,bf=fq(m,c,-2);
+if(bs==='slow'&&st8===0)tone(bf,d*7,bv,'triangle',0,false,dl,true);
+else if(bs==='drone'){if(st8===0)tone(bf,d*8,bv,'sine',0,false,dl,true);if(st8===4)tone(fq(m,c+4,-2),d*4,bv*.6,'sine',0,false,dl,true)}
+else if(bs==='pop'&&(st8===0||st8===3||st8===6))tone(st8===6?fq(m,c+4,-2):bf,d*1.6,bv,'triangle',0,false,dl,true);
+else if(bs==='eighth')tone(st8%2?bf*2:bf,d*.9,bv*.8,'triangle',0,false,dl,true);
+if(sp.arp)pluck(fq(m,[c,c+2,c+4,c+7][st8%4],1),v*.45,dl,true,1);
+if(sp.dr==='darb'){if(st8===0||st8===4)doum(dl);else if(st8===1||st8===3||st8===6)tek(dl)}
+else{const D=DRS[sp.dr||'none'];if(D.k&&D.k[st8]==='x')tone(110,.18,v*1.8,'sine',45,false,dl,true);if(D.s&&D.s[st8]==='x'){noise(1900,900,.14,v*1.1,.8,'bandpass',true,dl);tone(190,.08,v*.4,'triangle',0,false,dl,true)}if(D.h&&D.h[st8]==='x')noise(8000,6000,.04,v*.32,1,'highpass',true,dl)}
+mst++;mnx+=d}
 let lvA=null,mst=0,mnx=0;
 function layer(o,out,keep){const[k,f,q,v,lf,ld]=o,g=A.createGain();g.gain.value=v;let s;
 if(k==='o'){s=A.createOscillator();s.frequency.value=f;s.connect(g)}
@@ -585,7 +618,7 @@ else{s=A.createBufferSource();s.buffer=nb;s.loop=true;const b=A.createBiquadFilt
 if(ld){const l=A.createOscillator(),lg=A.createGain();l.frequency.value=lf;lg.gain.value=ld;l.connect(lg);lg.connect(g.gain);l.start();keep.push(l)}
 g.connect(out);s.start();keep.push(s)}
 function stopLv(){if(!lvA)return;const o=lvA;lvA=null;clearInterval(o.iv);o.g.gain.setTargetAtTime(0,A.currentTime,.3);setTimeout(()=>o.n.forEach(s=>{try{s.stop()}catch(e){}}),2000)}
-function musStep(m){
+function musStep(m){if(m.song)return songStep(m);
 const dl=Math.max(0,mnx-A.currentTime),L2=m.s.length,bar=Math.floor(mst/8),sh=m.prog?m.prog[bar%m.prog.length]:0;
 const deg=m.p?m.p[mst%m.p.length]:(Math.random()<.55?Math.floor(Math.random()*L2):-1);
 if(deg>=0){const f=440*Math.pow(2,(m.r+m.s[deg%L2]+12*Math.floor(deg/L2)+sh-69)/12);
