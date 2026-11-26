@@ -282,7 +282,8 @@ canvas{display:block}
 .arw svg{width:55%;height:55%}.arw:disabled{opacity:.2}
 #plR{right:.5em}#plL{left:.5em}
 .pld{margin:.1em 0 .4em;text-align:center}
-#plGo{font-size:1.15em;padding:.65em 2.4em;margin-top:.2em}
+#plHint{color:var(--glow);margin:.3em 0 0;font-size:1.05em;animation:pulse 2.2s ease-in-out infinite;min-height:1.3em}
+#lvView{width:100%;display:flex;flex-direction:column;align-items:center}
 .dots{display:flex;gap:.45em;margin-top:1em}.dots i{width:.5em;height:.5em;border-radius:50%;background:rgba(246,236,200,.25);transition:all .3s}.dots i.on{background:var(--glow);width:1.4em;border-radius:1em;box-shadow:0 0 .6em var(--glow)}
 .lvh{width:88%;display:flex;justify-content:flex-start;margin-bottom:.2em}.lvh .btn2{font-size:.85em;padding:.35em 1em}
 .plk{display:flex;flex-direction:column;align-items:center;gap:.35em;width:80%}
@@ -322,7 +323,7 @@ canvas{display:block}
 <div class="car"><button id="plR" class="arw" aria-label="الكوكب السابق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button><canvas id="plC"></canvas><button id="plL" class="arw" aria-label="الكوكب التالي"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button></div>
 <h2 class="ph ar" id="plN"></h2><p id="plD" class="dim pld"></p>
 <div id="plSt" class="sub"></div><div id="plLock" class="plk" hidden></div>
-<button id="plGo" class="btn gold"></button>
+<p id="plHint" class="hint"></p>
 <div id="plDots" class="dots"></div>
 </div>
 <div id="lvView" hidden>
@@ -863,8 +864,8 @@ const PLN=()=>PLANETS.length+1;
 function buildMenu(){wal();$('plView').hidden=plMode!=='pl';$('lvView').hidden=plMode==='pl';if(plMode==='pl')buildPl();else buildLv()}
 function buildPl(){const soon=plSel>=PLANETS.length,P=PLANETS[plSel],open=!soon&&planetOpen(plSel);
 $('plN').textContent=soon?'قريبًا':P.n;$('plD').textContent=soon?'كوكب جديد في الطريق…':P.d;
-$('plSt').hidden=!open;$('plGo').hidden=!open;$('plLock').hidden=open||soon;
-if(open){$('plSt').innerHTML='<span>★ '+ar(pStars(plSel))+' / '+ar(P.c*3)+'</span><span style="color:#c89aff">◆ '+ar(pGems(plSel))+' / '+ar(P.c)+'</span>';$('plGo').textContent='ادخل '+P.n}
+$('plSt').hidden=!open;$('plLock').hidden=open||soon;$('plHint').textContent=open&&revealP(plSel)>=1?'اضغط على الكوكب لتدخله':'';
+if(open){$('plSt').innerHTML='<span>★ '+ar(pStars(plSel))+' / '+ar(P.c*3)+'</span><span style="color:#c89aff">◆ '+ar(pGems(plSel))+' / '+ar(P.c)+'</span>'}
 else if(!soon){const need=P.need,have=pStars(plSel-1);$('plLock').innerHTML='<p class="gtx" style="margin:0">'+ico('lock')+' مقفل</p><p class="dim" style="margin:0;text-align:center">اجمع '+ar(need)+' نجمة من '+PLANETS[plSel-1].n+' لتفتحه</p><div class="bar"><i style="width:'+Math.min(100,have/need*100)+'%"></i></div><p class="gtx" style="margin:0">★ '+ar(have)+' / '+ar(need)+'</p>'}
 $('plDots').innerHTML=Array.from({length:PLN()},(_,k)=>'<i class="'+(k===plSel?'on':'')+'"></i>').join('');
 $('plR').disabled=plSel===0;$('plL').disabled=plSel===PLN()-1}
@@ -872,7 +873,7 @@ function buildLv(){const P=PLANETS[plSel];$('lvN').textContent=P.n;
 $('lvst').innerHTML='<span>★ '+ar(pStars(plSel))+' / '+ar(P.c*3)+'</span><span style="color:#c89aff">◆ '+ar(pGems(plSel))+' / '+ar(P.c)+'</span>';
 $('grid').innerHTML=LV.slice(P.f,P.f+P.c).map((l,j)=>{const i=P.f+j,o=!lvOpen(i),s=prog.s[i]||0;
 return `<button class="cd${o?' lk':''}" data-i="${i}" style="--a:${l.acc};--b:${l.sky[2]}"><span class="ar nm">${ar(j+1)}</span><span class="tt">${l.n}</span><span class="st">${o?'مقفلة':'★'.repeat(s)+'☆'.repeat(3-s)}${prog.gem[i]?'<span class="gm">◆</span>':''}</span></button>`}).join('');
-$('rpEnd').style.display=prog.end&&plSel===0?'':'none'}
+$('rpEnd').style.display=prog.end&&plSel===PLANETS.length-1?'':'none'}
 /* ---------- رسم الكواكب: خريطة سطح حقيقية ملفوفة على كرة تدور ---------- */
 function vNoise(seed){const r=mul(seed),N=256,P=new Float32Array(N*N);for(let i=0;i<N*N;i++)P[i]=r();
 return(x,y,per)=>{const xi=Math.floor(x),yi=Math.floor(y),xf=x-xi,yf=y-yi,sx=xf*xf*(3-2*xf),sy=yf*yf*(3-2*yf),X0=((xi%per)+per)%per,X1=(X0+1)%per,Y0=yi&255,Y1=(yi+1)&255,
@@ -926,20 +927,36 @@ $('plL').addEventListener('click',()=>goPlanet(plSel+1));$('plR').addEventListen
 const plC=$('plC');
 plC.addEventListener('pointerdown',e=>{swX=e.clientX;swT=performance.now();car.dragging=true;car.drag=0;car.to=carPos();car.k=1;try{plC.setPointerCapture(e.pointerId)}catch(x){}});
 plC.addEventListener('pointermove',e=>{if(swX==null)return;const Dw=plC.clientWidth*.6;car.drag=clamp((e.clientX-swX)/Dw,-1.2,1.2);const lo=-car.to,hi=PLN()-1-car.to;if(car.drag<lo)car.drag=lo+(car.drag-lo)*.3;if(car.drag>hi)car.drag=hi+(car.drag-hi)*.3});
-function swEnd(e){if(swX==null)return;const dx=e.clientX-swX,v=dx/Math.max(1,performance.now()-swT),pos=carPos();swX=null;car.dragging=false;
+function swEnd(e){if(swX==null)return;const dx=e.clientX-swX,dtp=performance.now()-swT,v=dx/Math.max(1,dtp),pos=carPos();swX=null;car.dragging=false;
+if(Math.abs(dx)<10&&dtp<500&&e.type==='pointerup'){car={from:pos,to:plSel,k:1,drag:0,dragging:false};const rc=plC.getBoundingClientRect(),off=e.clientX-(rc.left+rc.width/2),rr=rc.height*.42;
+if(Math.abs(off)<rr)enterPlanet();else goPlanet(plSel+(off<0?1:-1));return}
 let k=Math.round(pos);if(Math.abs(dx)>30&&Math.round(pos)===plSel)k=plSel+(dx>0?1:-1);if(Math.abs(v)>.5)k=plSel+(dx>0?1:-1);k=clamp(k,0,PLN()-1);
 if(k===plSel){car={from:pos,to:plSel,k:0,drag:0,dragging:false}}else goPlanet(k,pos)}
 plC.addEventListener('pointerup',swEnd);plC.addEventListener('pointercancel',swEnd);
-$('plGo').addEventListener('click',()=>{if(!planetOpen(plSel))return;plMode='lv';sfx.pw();buzz('l');buildMenu();$('pv').scrollTop=0});
+function enterPlanet(){if(plSel>=PLANETS.length||!planetOpen(plSel)||revealP(plSel)<1)return;plMode='lv';sfx.pw();buzz('l');buildMenu();$('pv').scrollTop=0}
 $('plBack').addEventListener('click',()=>{plMode='pl';sfx.tick();buildMenu();$('pv').scrollTop=0});
-function drawOrb(k,x,y,r,N){if(k>=PLANETS.length){X.save();X.strokeStyle='rgba(246,236,200,.5)';X.lineWidth=2;X.setLineDash([6,6]);X.beginPath();X.arc(x,y,r,0,7);X.stroke();X.setLineDash([]);
-const g=X.createRadialGradient(x-r*.3,y-r*.3,r*.1,x,y,r);g.addColorStop(0,'rgba(80,70,140,.5)');g.addColorStop(1,'rgba(20,16,50,.2)');X.fillStyle=g;X.beginPath();X.arc(x,y,r*.96,0,7);X.fill();
-X.fillStyle='rgba(246,236,200,.75)';X.font="700 "+Math.round(r*.8)+"px Tajawal,sans-serif";X.textAlign='center';X.textBaseline='middle';X.fillText('؟',x,y+r*.06);X.restore();return}
-const id=PLANETS[k].id;planetAt(id,x,y,r,t*({earth:.018,mars:.014,jupiter:.03}[id]),N);
-if(!planetOpen(k)){X.save();const g=X.createRadialGradient(x,y,0,x,y,r);g.addColorStop(0,'rgba(6,6,18,.45)');g.addColorStop(1,'rgba(6,6,18,.7)');X.fillStyle=g;X.beginPath();X.arc(x,y,r*1.01,0,7);X.fill();
-const q=r*.2;X.fillStyle='rgba(255,255,255,.92)';X.beginPath();X.roundRect?X.roundRect(x-q,y-q*.15,q*2,q*1.6,q*.3):X.rect(x-q,y-q*.15,q*2,q*1.6);X.fill();X.strokeStyle='rgba(255,255,255,.92)';X.lineWidth=q*.32;X.beginPath();X.arc(x,y-q*.15,q*.62,Math.PI,0);X.stroke();X.restore()}}
+let reveal=null;
+function revealP(k){if(k===0||prog.seen['rv'+k])return 1;if(reveal&&reveal.k===k)return ease(reveal.t/2.6);return 0}
+const CPUF=Array.from({length:30},(_,i)=>{const h=k=>{const v=Math.sin(k*127.1)*43758.5;return v-Math.floor(v)},a=i*2.399,d=Math.sqrt((i+.5)/30)*.95;return[Math.cos(a)*d,Math.sin(a)*d*.9,.2+h(i+3)*.2,h(i+9)]});
+function cloudCover(x,y,r,p,k){if(p>=1)return;const a=1-p*p;
+let g=X.createRadialGradient(x,y,r*.2,x,y,r*1.2);g.addColorStop(0,'rgba(236,232,250,'+(.96*a)+')');g.addColorStop(.75,'rgba(214,208,240,'+(.9*a)+')');g.addColorStop(1,'rgba(190,180,230,0)');
+X.save();X.translate(0,-p*r*.15);X.fillStyle=g;X.globalAlpha*=1-p;X.beginPath();X.arc(x,y,r*1.2,0,7);X.fill();X.restore();
+for(const[bx,by,br,q]of CPUF){const dir=bx<0?-1:1,ox=x+bx*r+dir*p*r*(1.6+q)+Math.sin(t*.6+q*9+k)*r*.03,oy=y+by*r-p*r*(.2+q*.3)+Math.cos(t*.5+q*7)*r*.025,rr=br*r*(1+p*.35);
+const sh=X.createRadialGradient(ox-rr*.35,oy-rr*.45,rr*.05,ox,oy+rr*.1,rr);sh.addColorStop(0,'rgba(255,255,255,'+(.95*a)+')');sh.addColorStop(.5,'rgba(240,236,252,'+(.85*a)+')');sh.addColorStop(.8,'rgba(200,192,232,'+(.45*a)+')');sh.addColorStop(1,'rgba(180,170,220,0)');
+X.fillStyle=sh;X.beginPath();X.arc(ox,oy,rr,0,7);X.fill()}}
+let CLD=null;
+function cloudStill(x,y,r){const sc=X.getTransform().a,px=Math.round(2.7*40*sc);if(!CLD||CLD.width!==px){CLD=document.createElement('canvas');CLD.width=CLD.height=px;const c=CLD.getContext('2d');c.setTransform(sc,0,0,sc,px/2,px/2);const tt=t;withCtx(c,()=>cloudCover(0,0,40,0,0))}
+X.drawImage(CLD,x-1.35*r,y-1.35*r,2.7*r,2.7*r)}
+function drawLock(x,y,r){const q=r*.2;X.save();X.fillStyle='rgba(70,60,120,.9)';X.beginPath();X.roundRect?X.roundRect(x-q,y-q*.15,q*2,q*1.6,q*.3):X.rect(x-q,y-q*.15,q*2,q*1.6);X.fill();X.strokeStyle='rgba(70,60,120,.9)';X.lineWidth=q*.32;X.beginPath();X.arc(x,y-q*.15,q*.62,Math.PI,0);X.stroke();X.restore()}
+function drawOrb(k,x,y,r,N){if(k>=PLANETS.length){const g=X.createRadialGradient(x-r*.3,y-r*.3,r*.1,x,y,r);g.addColorStop(0,'#4a4280');g.addColorStop(1,'#140f34');X.fillStyle=g;X.beginPath();X.arc(x,y,r,0,7);X.fill();cloudStill(x,y,r);drawLock(x,y,r);return}
+const id0=PLANETS[k].id;planetAt(id0,x,y,r,t*({earth:.018,mars:.014,jupiter:.03}[id0]),N);
+if(!planetOpen(k)){cloudStill(x,y,r);drawLock(x,y,r);return}
+const rv=revealP(k);if(rv<1){if(rv<=0)cloudStill(x,y,r);else cloudCover(x,y,r,rv,k);return}
+}
 function drawCar(dt){const cv=plC,w=Math.round(cv.clientWidth*DPR),h=Math.round(cv.clientHeight*DPR);if(!w)return;if(cv.width!==w||cv.height!==h){cv.width=w;cv.height=h}
-if(!car.dragging&&car.k<1)car.k=Math.min(1,car.k+dt*2.2);const c=cv.getContext('2d');c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,w,h);c.imageSmoothingQuality='high';
+if(!car.dragging&&car.k<1)car.k=Math.min(1,car.k+dt*2.2);
+if(!reveal&&plSel<PLANETS.length&&planetOpen(plSel)&&revealP(plSel)<1&&car.k>=1&&!car.dragging){reveal={k:plSel,t:0};noise(400,2400,2.4,.12,.6);setTimeout(()=>sfx.win(),900);buzz('w')}
+if(reveal){reveal.t+=dt;if(reveal.t>=2.6){prog.seen['rv'+reveal.k]=1;save();reveal=null;buildPl()}}const c=cv.getContext('2d');c.setTransform(1,0,0,1,0,0);c.clearRect(0,0,w,h);c.imageSmoothingQuality='high';
 withCtx(c,()=>{const u=h/100;c.setTransform(u,0,0,u,w/2,h/2);const pv=carPos(),D=w/u*.6,big=Math.min(260,Math.round(80*u)),sml=Math.round(big*.45);
 const list=[];for(let k=0;k<PLN();k++){const x=(pv-k)*D;if(Math.abs(x)<D*1.75)list.push([k,x])}list.sort((a,b)=>Math.abs(b[1])-Math.abs(a[1]));
 const a0=t*.9,ox=Math.cos(a0)*60,oy=Math.sin(a0)*24+8,front=Math.sin(a0)>0,gs=.5;
@@ -1078,7 +1095,7 @@ oh.textContent=w?'أضاءت المرحلة':'سقطت';if(w)oh.style.color='#ff
 $('ostars').textContent=w?'★'.repeat(s)+'☆'.repeat(3-s):'';
 $('ol1').innerHTML='الأعمدة <b>'+ar(score)+'</b> / <b>'+ar(L.goal)+'</b>';$('ol2').innerHTML='العملات <b>'+ar(lc)+'</b>'+coinNote();
 if(gemGot)$('onew').innerHTML='<span style="color:#c89aff">◆ لقيت الجوهرة المخبّأة!</span>';
-$('nb').textContent=w?(!lastOf(li)?'المس للمرحلة التالية':li===9?'أنرتَ الليل كله':'أنرت '+PLANETS[planetIdx(li)].n+' كله'):'المس للمحاولة مرة ثانية';
+$('nb').textContent=w?(!lastOf(li)?'المس للمرحلة التالية':li===LV.length-1?'أنرت الكون كله':'أنرت '+PLANETS[planetIdx(li)].n+(PLANETS[planetIdx(li)].id==='earth'?' كلها':' كله')):'المس للمحاولة مرة ثانية';
 if(w){const was=PLANETS.map((p,k)=>planetOpen(k));if(s>(prog.s[li]||0))prog.s[li]=s;prog.u=Math.max(prog.u,li+1);
 PLANETS.forEach((p,k)=>{if(!was[k]&&planetOpen(k)){$('onew').innerHTML=ico('planet','#ffb48a')+' انفتح كوكب '+p.n+'!';setTimeout(()=>{toast('planet','انفتح كوكب '+p.n+'!','اختره من صفحة المراحل');sfx.ach()},900)}})}}
 else if(mode==='end'){oh.textContent='سقطت';$('ol1').innerHTML='الأعمدة <b>'+ar(score)+'</b>';$('ol2').innerHTML='أفضل رقم <b>'+ar(prog.eb)+'</b> · العملات <b>'+ar(lc)+'</b>'+coinNote();
@@ -1097,7 +1114,7 @@ prog.st.runs++;if(w)prog.st.wins++;save();chkAch()}
 function win(){st='win';deadAt=performance.now();sfx.win();buzz('w');hapUntil=t+99;flash=.5;show('pause',false);show('tip',false);
 if(mode==='day'){dayFix();if(!prog.day.done){prog.day.done=1;prog.c+=25;dayRew=true;ach('daily')}}
 endRun(true);fillOver(1);
-if(mode==='lv'&&li===9){setTimeout(()=>{if(st==='win')startEnding(false)},1400);return}
+if(mode==='lv'&&li===LV.length-1){setTimeout(()=>{if(st==='win')startEnding(false)},1400);return}
 setTimeout(()=>{if(st==='win'){show('over',true);show('score',false)}},1100)}
 function flap(){vy=-430*((L.env&&L.env.fl)||1);flapT=1;flapUntil=t+.35;sfx.flap();buzz('l')}
 function show(id,on){$(id).classList.toggle('hide',!on)}
@@ -1250,7 +1267,7 @@ for(const p of pops)p.l-=dt*.75;pops=pops.filter(p=>p.l>0)}
 /* ---------- الخاتمة ---------- */
 let enG=null;
 const DAWN=['#2b2f6e','#7a5aa8','#f0907a','#ffd8a0'];
-const ETX=[[6.3,'عشر ليالٍ… عبرتها همس بهدوء'],[10,'وجمعت من كل ليلة ضوءها'],[14,'فصار الليل كله نورًا'],[17.4,'ونام الليل مطمئنًا… لأنها ما أيقظته']];
+const ETX=[[6.3,'من ليالي الأرض… إلى رمال المريخ وعواصف المشتري'],[10,'جمعت همس من كل عالم ضوءه'],[14,'فصار الكون كله نورًا'],[17.4,'ونام الليل مطمئنًا… لأنها ما أيقظته']];
 function startEnding(replay){
 st='ending';mode='lv';li=9;L=LV[9];prevL=null;xf=1;zoom=1;ts=1;muffle(false);pw={sh:0,mg:0,sl:0};
 if(replay){pipes=[];items=[];y=H*.42;vy=0;gx=0}
@@ -1269,7 +1286,7 @@ const a=ease((T-.4)/2.6);gxp=lerp(e.gx0,W/2,a);let ty=lerp(e.gy0,H*.56,a);
 const m=ease((T-5.5)/3.5);MO.x=lerp(268,W/2,m);MO.y=lerp(120,H*.27,m);MO.r=lerp(50,64,m);
 const b=ease((T-9)/3.6);ty=lerp(ty,MO.y+MO.r+30,b);
 y=ty+Math.sin(t*2)*5;tilt=Math.sin(t*1.5)*.08;vy=0;flapT=.3+.3*Math.sin(t*3);
-while(e.lt.length<10&&T>1.8+e.lt.length*.42){const i=e.lt.length,lx=24+((i*97+13)%312);e.lt.push({c:LV[i].acc,x:lx,y:H-GR,a:i/10*Math.PI*2,s:0});burst(lx,H-GR-4,LV[i].acc,12,120);buzz('l')}
+while(e.lt.length<10&&T>1.8+e.lt.length*.42){const i=e.lt.length,lx=24+((i*97+13)%312);e.lt.push({c:LV[Math.min(LV.length-1,i*3)].acc,x:lx,y:H-GR,a:i/10*Math.PI*2,s:0});burst(lx,H-GR-4,LV[i].acc,12,120);buzz('l')}
 if(T>13&&!e.fl0){e.fl0=1;flash=.85;burst(MO.x,MO.y,'#fff6dc',70,320);for(const l of e.lt)burst(l.x,l.y,l.c,10,200);buzz('w')}
 if(e.fl0)e.fl=Math.min(1,e.fl+dt*.45);
 for(const l of e.lt){l.s=Math.min(1,l.s+dt*.7);l.a+=dt*(1+b*.5);
@@ -1291,11 +1308,11 @@ noise(600,7000,1.4,.12,.7,'bandpass',true,11.8,o);
 [48,55,60,64,67,72].forEach(m=>T(n(m),7,.04,'sine',20.4))}
 function finishEnding(skip){const e=en;if(!e||e.card)return;e.card=true;$('eskip').style.display='none';
 if(skip){if(enG){const g=enG;g.gain.setTargetAtTime(0,A.currentTime,.25);setTimeout(()=>{try{g.disconnect()}catch(x){}},2500);enG=null}
-while(e.lt.length<10){const i=e.lt.length;e.lt.push({c:LV[i].acc,x:W/2,y:H*.3,a:i/10*Math.PI*2,s:1})}
+while(e.lt.length<10){const i=e.lt.length;e.lt.push({c:LV[Math.min(LV.length-1,i*3)].acc,x:W/2,y:H*.3,a:i/10*Math.PI*2,s:1})}
 e.t=Math.max(e.t,19.5);e.fl0=1;e.fl=Math.max(e.fl,.9);flash=.7;
 if(A)[48,55,60,64,67,72].forEach(m=>tone(440*Math.pow(2,(m-69)/12),6,.04,'sine',0,true,0,true))}
 setEndTx('');
-$('endSt').innerHTML='<span>النجوم <b>★ '+ar(pStars(0))+' / ٣٠</b></span><span>الجواهر <b style="color:#c89aff">◆ '+ar(pGems(0))+' / ١٠</b></span><span>العملات <b>'+ar(prog.tc)+'</b></span><span>الأوسمة <b>'+ar(Object.keys(prog.ach).length+(prog.ach.ending?0:1))+' / '+ar(ACH.length)+'</b></span>';
+$('endSt').innerHTML='<span>النجوم <b>★ '+ar(starSum())+' / '+ar(LV.length*3)+'</b></span><span>الجواهر <b style="color:#c89aff">◆ '+ar(gemSum())+' / '+ar(LV.length)+'</b></span><span>العملات <b>'+ar(prog.tc)+'</b></span><span>الأوسمة <b>'+ar(Object.keys(prog.ach).length+(prog.ach.ending?0:1))+' / '+ar(ACH.length)+'</b></span>';
 $('endRw').innerHTML=e.first?ico('moon','#ffd27a')+' حصلت على <b>تاج القمر</b><br><small style="opacity:.8">تلقاه في المتجر</small>':'شكرًا لأنك رجعت للخاتمة';
 setTimeout(()=>{show('endCard',true);ach('ending');prepShare('ending')},skip?500:300)}
 $('eskip').addEventListener('click',e=>{e.stopPropagation();finishEnding(true)});
@@ -1317,7 +1334,7 @@ c.fillStyle=Lx.tr||'#120f33';c.beginPath();c.moveTo(0,Hc);for(let x=0;x<=Wc;x+=2
 c.textAlign='center';c.direction='rtl';c.fillStyle='#f6ecc8';c.shadowColor='#7ff0d8';c.shadowBlur=40;c.font="700 200px 'Aref Ruqaa',serif";c.fillText('همس',Wc/2,300);c.shadowBlur=0;
 withCtx(c,()=>{c.save();c.translate(Wc/2+60,590);c.scale(7.5,7.5);drawGirl(0,0,{e:'happy',acc:prog.acc,tail:prog.tail,tilt:-.12,flapT:.4});c.restore()});
 let big,sub;
-if(kind==='ending'){big='أنرت الليالي العشر';sub='★ '+ar(pStars(0))+' / ٣٠   ·   ◆ '+ar(pGems(0))+' / ١٠'}
+if(kind==='ending'){big='أنرت الكون كله';sub='★ '+ar(starSum())+' / '+ar(LV.length*3)+'   ·   ◆ '+ar(gemSum())+' / '+ar(LV.length)}
 else if(kind==='end'){big=ar(score);sub='عمود في وضع بلا نهاية'}
 else if(kind==='day'){big=ar(score)+' / ٢٠';sub='تحدي اليوم · '+LV[li].n}
 else{big=ar(score)+' / '+ar(L.goal);sub=(planetIdx(li)?PLANETS[planetIdx(li)].n+' · ':'')+'المرحلة '+ar(li-PLANETS[planetIdx(li)].f+1)+' · '+L.n}
@@ -1326,7 +1343,7 @@ c.font="500 54px Tajawal";c.fillStyle='#f6ecc8';c.fillText(sub,Wc/2,1060);
 c.font="700 64px 'Aref Ruqaa',serif";c.fillStyle='#ffd27a';c.fillText(kind==='ending'?'حلّق معي حتى الفجر':'تقدر تتفوق علي؟',Wc/2,1180);
 c.shadowBlur=0;c.font="400 40px Tajawal";c.globalAlpha=.75;c.fillStyle='#f6ecc8';c.fillText('حلّق بهدوء… ولا توقظ الليل',Wc/2,1275);
 const blob=await new Promise(r=>cv.toBlob(r,'image/png'));
-const txt=kind==='ending'?'أنرت الليالي العشر في همس':kind==='end'?'نتيجتي في همس (بلا نهاية): '+ar(score)+' … تقدر تتفوق علي؟':kind==='day'?'تحدي اليوم في همس: '+ar(score)+' / ٢٠… جرّب تتفوق علي':'نتيجتي في همس («'+L.n+'»): '+ar(score)+' / '+ar(L.goal)+' … تقدر تتفوق علي؟';
+const txt=kind==='ending'?'أنرت الكون كله في همس':kind==='end'?'نتيجتي في همس (بلا نهاية): '+ar(score)+' … تقدر تتفوق علي؟':kind==='day'?'تحدي اليوم في همس: '+ar(score)+' / ٢٠… جرّب تتفوق علي':'نتيجتي في همس («'+L.n+'»): '+ar(score)+' / '+ar(L.goal)+' … تقدر تتفوق علي؟';
 return{blob,file:new File([blob],'hams.png',{type:'image/png'}),txt}}
 async function doShare(){const p=shareP||makeCard(shareKind||mode);const d=await p;if(!d){toast('warn','ما قدرنا نجهّز الصورة');return}
 const url=myLink();
